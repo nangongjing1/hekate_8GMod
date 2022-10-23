@@ -53,7 +53,7 @@ static void _create_window_backup_restore(emmcPartType_t type, const char* win_l
 
 	char win_label_full[80];
 
-	s_printf(win_label_full, "%s%s", emmc_btn_ctxt.restore ? SYMBOL_DOWNLOAD"  Restore " : SYMBOL_UPLOAD"  Backup ", win_label+3);
+	s_printf(win_label_full, "%s%s", emmc_btn_ctxt.restore ? SYMBOL_DOWNLOAD"  恢复 " : SYMBOL_UPLOAD"  备份 ", win_label+3);
 
 	lv_obj_t *win = nyx_create_standard_window(win_label_full);
 
@@ -271,13 +271,13 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_obj_t *win;
 
 	emmc_btn_ctxt.restore = false;
-	if (strcmp(lv_label_get_text(lv_obj_get_child(btn, NULL)), SYMBOL_UPLOAD"  Backup eMMC"))
+	if (strcmp(lv_label_get_text(lv_obj_get_child(btn, NULL)), SYMBOL_UPLOAD"  备份 eMMC"))
 		emmc_btn_ctxt.restore = true;
 
 	if (!emmc_btn_ctxt.restore)
-		win = nyx_create_standard_window(SYMBOL_SD" Backup");
+		win = nyx_create_standard_window(SYMBOL_SD" 备份");
 	else
-		win = nyx_create_standard_window(SYMBOL_SD" Restore");
+		win = nyx_create_standard_window(SYMBOL_SD" 恢复");
 
 	static lv_style_t h_style;
 	lv_style_copy(&h_style, &lv_style_transp);
@@ -325,16 +325,16 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to backup the BOOT physical partitions.\n"
-			"They contain the BCT, keys and various package1.\n"
-			"#FF8000 These are paired with the RAW GPP backup.#");
+			"允许您备份 BOOT 物理分区.\n"
+			"包含BCT, keys和package1中的各种变量.\n"
+			"#FF8000 需要与RAW GPP备份数据配对.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to restore the BOOT physical partitions.\n"
-			"They contain the BCT, keys and various package1.\n"
-			"#FF8000 These are paired with the RAW GPP restore.#");
+			"允许您恢复 BOOT 物理分区.\n"
+			"包含BCT, keys和各种package1.\n"
+			"#FF8000 需要与RAW GPP恢复数据配对.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -355,16 +355,16 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to backup the GPP physical partition.\n"
-			"It contains, CAL0, various package2, SYSTEM, USER, etc.\n"
-			"#FF8000 This is paired with the BOOT0/1 backups.#");
+			"允许您备份 GPP 物理分区.\n"
+			"它包含CAL0, 各种package2, SYSTEM, USER, 等等.\n"
+			"#FF8000 需要与BOOT0/1备份数据配对.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"Allows you to restore the GPP physical partition.\n"
-			"It contains, CAL0, various package2, SYSTEM, USER, etc.\n"
-			"#FF8000 This is paired with the BOOT0/1 restore.#");
+			"允许您恢复 GPP 物理分区.\n"
+			"它包含CAL0, 各种package2, SYSTEM, USER, 等等.\n"
+			"#FF8000 需要与BOOT0/1恢复数据配对.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -406,15 +406,15 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt4,
-			"Allows you to backup the partitions from RAW GPP except\n"
-			"USER. It contains, CAL0, various package2, SYSTEM, etc.\n"
-			"#FF8000 This is an incomplete backup.#");
+			"允许您从 RAW GPP 备份分区, 除了USER.\n"
+			"它包含CAL0, 各种package2, SYSTEM, 等等.\n"
+			"#FF8000 这是一个不完整的备份.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt4,
-			"Allows you to restore ALL partitions from RAW GPP\n"
-			"It contains, CAL0, various package2, SYSTEM, USER, etc.\n");
+			"允许您从 RAW GPP 恢复分区\n"
+			"它包含CAL0, various package2, SYSTEM, USER, 等等.\n");
 	}
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
@@ -433,8 +433,8 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 		label_txt4 = lv_label_create(h2, NULL);
 		lv_label_set_recolor(label_txt4, true);
 		lv_label_set_static_text(label_txt4,
-			"Allows you to backup the USER partition from RAW GPP.\n"
-			"#FF8000 This is an incomplete backup.#\n");
+			"允许您从 RAW GPP 备份 USER 分区.\n"
+			"#FF8000 这是一个不完整的备份.#\n");
 		lv_obj_set_style(label_txt4, &hint_small_style);
 		lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 	}
