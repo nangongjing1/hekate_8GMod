@@ -1135,12 +1135,15 @@ recovery_not_found:
 	manual_system_maintenance(true);
 
 	// Check if Device Tree should be flashed.
-	strcpy(path, "switchroot/install/tegra210-icosa.dtb");
+	strcpy(path, "switchroot/install/nx-plat.dtimg");
 	if (f_stat(path, NULL))
 	{
-		strcat(txt_buf, "#FF8000 警告:# DTB镜像未找到!");
-
-		goto dtb_not_found;
+		strcpy(path, "switchroot/install/tegra210-icosa.dtb");
+		if (f_stat(path, NULL))
+		{
+			strcat(txt_buf, "#FF8000 警告:# DTB镜像未找到!");
+			goto dtb_not_found;
+		}
 	}
 
 	offset_sct = 0;
@@ -1247,6 +1250,7 @@ static lv_res_t _action_flash_android(lv_obj_t *btn)
 	lv_label_set_recolor(lbl_status, true);
 	lv_label_set_text(lbl_status,
 		"本操作将会刷写 #C7EA46 Kernel#, #C7EA46 DTB# 和 #C7EA46 Recovery#.\n"
+		"如果刷写成功这些将会被删除.\n"
 		"你要继续吗?");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map,  _action_flash_android_data);
@@ -2457,6 +2461,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	if (!sd_mount())
 	{
 		lv_obj_t *lbl = lv_label_create(h1, NULL);
+		lv_label_set_recolor(lbl, true);
 		lv_label_set_text(lbl, "#FFDD00 初始化SD卡失败!#");
 		return LV_RES_OK;
 	}
@@ -2639,8 +2644,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	lv_label_set_static_text(lbl_notes,
 		"注 1: 最多只能备份#C7EA46 1GB#. 如果需要更多, 请在下一步手动备份它们.\n"
 		"注 2: 调整过大小的emuMMC会格式化USER分区. 你可使用存档数据管理器将其备份到其他地方.\n"
-		"注 3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写 Linux# 和 #C7EA46 刷写 Android# 将会刷入文件.\n"
-		"注 4: 安装目录为#C7EA46 switchroot/install#. Linux使用 #C7EA46 l4t.XX# 而Android使用#C7EA46 recovery/twrp.img# 和 #C7EA46 tegra210-icosa.dtb#.");
+		"注 3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写 Linux# 和 #C7EA46 刷写 Android# 将会刷入文件.\n");
 	lv_label_set_style(lbl_notes, &hint_small_style);
 	lv_obj_align(lbl_notes, lbl_and, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 
