@@ -13,6 +13,13 @@ for filename in os.listdir("../nyx/nyx_gui/frontend"):
             for w in ll:
                 allChineseWords.add(w)
 
+for filename in os.listdir("../bdk/usb"):
+    if filename.endswith('.c'):
+        with open('../bdk/usb/' + filename, encoding='utf-8') as file:
+            content = file.read()
+            ll = re.findall('[\u4e00-\u9fa5]', content)
+            for w in ll:
+                allChineseWords.add(w)
 allChineseWords.update(set(list("识别大气层侦安卓怀旧")))
 wordList = list(allChineseWords)
 wordList.sort()

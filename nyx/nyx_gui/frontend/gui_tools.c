@@ -139,7 +139,7 @@ static lv_res_t _create_mbox_autorcm_status(lv_obj_t *btn)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
@@ -149,14 +149,14 @@ static lv_res_t _create_mbox_autorcm_status(lv_obj_t *btn)
 	{
 		lv_mbox_set_text(mbox,
 			"AutoRCM现在已经 #C7EA46 开启!#\n\n"
-			"你现在可以通过按 #FF8000 电源键# 自动进入RCM.\n"
-			"后续如果你想关闭, 可以按这里的AutoRCM按钮.");
+			"您现在只需按下 #FF8000 电源键# 即可自动进入RCM模式.\n"
+			"如果想要在以后取消AutoRCM, 请再次使用此处的AutoRCM按钮.");
 	}
 	else
 	{
 		lv_mbox_set_text(mbox,
-			"AutoRCM现在已经 #FF8000 关闭!#\n\n"
-			"启动流程以及恢复, 你需要按 #FF8000 音量+# + #FF8000 HOME# (jig) 组合以进入RCM.\n");
+			"AutoRCM现在已经#FF8000 关闭!#\n\n"
+			"现在启动过程已恢复正常, 您需要使用 #FF8000 音量+# 和 #FF8000 HOME# (使用短接器) 组合键才能进入RCM模式.\n");
 	}
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
@@ -326,7 +326,7 @@ static lv_res_t _create_mbox_ums_error(int error)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char *mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
@@ -718,7 +718,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"允许你挂载SD卡到PC/手机.\n"
+		"允许你挂载SD卡到电脑或手机.\n"
 		"#C7EA46 支持所有的操作系统. 访问权限为# #FF8000 读/写.#");
 
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -727,7 +727,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	// Create RAW GPP button.
 	lv_obj_t *btn_gpp = lv_btn_create(h1, btn1);
 	label_btn = lv_label_create(btn_gpp, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_CHIP"  eMMC RAW GPP");
+	lv_label_set_static_text(label_btn, SYMBOL_CHIP"  eMMC 原始GPP");
 	lv_obj_align(btn_gpp, label_txt2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn_gpp, LV_BTN_ACTION_CLICK, _action_ums_emmc_gpp);
 
@@ -748,7 +748,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	// Create emuMMC RAW GPP button.
 	lv_obj_t *btn_emu_gpp = lv_btn_create(h1, btn1);
 	label_btn = lv_label_create(btn_emu_gpp, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  emu RAW GPP");
+	lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  emu 原始GPP");
 	lv_obj_align(btn_emu_gpp, btn_gpp, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn_emu_gpp, LV_BTN_ACTION_CLICK, _action_ums_emuemmc_gpp);
 
@@ -769,7 +769,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"允许你挂载 eMMC/emuMMC.\n"
+		"允许你挂载 eMMC或emuMMC.\n"
 		"#C7EA46 默认访问权限为# #FF8000 只读.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn_emu_gpp, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -1007,7 +1007,7 @@ static lv_res_t _create_mbox_fix_touchscreen(lv_obj_t *btn)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char *mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
@@ -1022,7 +1022,7 @@ static lv_res_t _create_mbox_fix_touchscreen(lv_obj_t *btn)
 
 	lv_mbox_set_text(mbox,
 		"#FFDD00 警告: 仅在触摸屏有问题时才需运行!#\n\n"
-		"按 #FF8000 POWER# 继续.\n按 #FF8000 VOL# 中止.");
+		"按#FF8000 电源键# 继续.\n按 #FF8000 音量键# 中止.");
 	manual_system_maintenance(true);
 
 	if (!(btn_wait() & BTN_POWER))
@@ -1494,7 +1494,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"允许您单独恢复 eMMC/emuMMC 分区\n"
+		"允许您单独恢复 eMMC或emuMMC 分区\n"
 		"或从SD卡恢复整个原始镜像.\n"
 		"#C7EA46 支持# #FF8000 4GB# #C7EA46 及以上SD卡. #"
 		"#FF8000 FAT32# #C7EA46 和 ##FF8000 exFAT##C7EA46 文件系统.#");
@@ -1613,7 +1613,7 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"允许您校准触摸屏模块.\n"
-		"#FF8000 这可以解决Nyx和HOS中触摸屏的任何问题.#");
+		"#FF8000 这可以解决Nyx和官方系统中触摸屏的任何问题.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
@@ -1665,13 +1665,13 @@ static void _create_tab_tools_arc_autorcm(lv_theme_t *th, lv_obj_t *parent)
 	char *txt_buf = (char *)malloc(SZ_4K);
 
 	s_printf(txt_buf,
-		"允许您在不使用 #C7EA46 音量+# & #C7EA46 HOME# (jig) 的情况下进入RCM.\n"
+		"允许您在不使用 #C7EA46 音量+# 和 #C7EA46 HOME# (jig) 的情况下进入RCM.\n"
 		"#FF8000 它可以在需要时恢复所有版本的AutoRCM.#\n"
 		"#FF3C28 这会破坏BCT, 如果没有自定义引导加载程序#\n"
 		"#FF3C28 您将无法启动.#");
 
 	if (h_cfg.rcm_patched)
-		strcat(txt_buf, " #FF8000 由于本机为补丁机, 本选项禁用!#");
+		strcat(txt_buf, "#FF8000 此设备已修复RCM漏洞, 本选项禁用!#");
 
 	lv_obj_t *label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);

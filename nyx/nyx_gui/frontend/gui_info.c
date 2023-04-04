@@ -41,7 +41,7 @@ static lv_res_t _create_window_dump_done(int error, char *dump_filenames)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
@@ -299,7 +299,7 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 		// Clear EKS keys.
 		hos_eks_clear(KB_FIRMWARE_VERSION_MAX);
 
-		lv_label_set_text(lb_desc, "#FFDD00 CAL0 被污染或错误的keys!#\n");
+		lv_label_set_text(lb_desc, "#FFDD00 CAL0 被污染或错误的密钥!#\n");
 		goto out;
 	}
 
@@ -388,7 +388,7 @@ out:
 
 static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 {
-	lv_obj_t *win = nyx_create_standard_window(SYMBOL_CHIP" 硬件和缓存的Fuses信息");
+	lv_obj_t *win = nyx_create_standard_window(SYMBOL_CHIP" 硬件和Fuses信息");
 	lv_win_add_btn(win, NULL, SYMBOL_DOWNLOAD" 提取fuses信息", _fuse_dump_window_action);
 	lv_win_add_btn(win, NULL, SYMBOL_INFO" CAL0 信息", _create_mbox_cal0);
 
@@ -1290,7 +1290,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 7 * 4);
@@ -1615,7 +1615,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		break;
 	case 0x45: // Unofficial.
 		strcat(txt_buf, "SanDisk ");
-		lv_win_add_btn(win, NULL, SYMBOL_FILE_ALT" Device Report", _create_mbox_emmc_sandisk_report);
+		lv_win_add_btn(win, NULL, SYMBOL_FILE_ALT" 设备报告", _create_mbox_emmc_sandisk_report);
 		break;
 	case 0x90:
 		strcat(txt_buf, "SK Hynix ");
@@ -1790,7 +1790,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		lv_obj_set_style(dark_bg, &mbox_darken);
 		lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-		static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+		static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 		lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 		lv_mbox_set_recolor_text(mbox, true);
 
@@ -2077,7 +2077,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_set_size(desc3, LV_HOR_RES / 2 / 2 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 
 	lv_obj_t * lb_desc3 = lv_label_create(desc3, lb_desc);
-	lv_label_set_text(lb_desc3, "#D4FF00 Acquiring FAT volume info...#");
+	lv_label_set_text(lb_desc3, "#D4FF00 正在获取 FAT 卷信息...#");
 	lv_obj_set_width(lb_desc3, lv_obj_get_width(desc3));
 
 	lv_obj_align(desc3, desc, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
@@ -2215,7 +2215,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	max17050_get_property(MAX17050_VCELL, &value);
 	bool voltage_empty = value < 3200;
 	s_printf(txt_buf + strlen(txt_buf), "%s%d mV%s\n",
-		voltage_empty ? "#FF8000 " : "", value,  voltage_empty ? " - Low "SYMBOL_WARNING"#" : "");
+		voltage_empty ? "#FF8000 " : "", value,  voltage_empty ? " - 低 "SYMBOL_WARNING"#" : "");
 
 	max17050_get_property(MAX17050_OCVInternal, &value);
 	s_printf(txt_buf + strlen(txt_buf), "%d mV\n", value);
@@ -2494,14 +2494,15 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	if (lockpick_found)
 	{
 		lv_label_set_static_text(label_txt2,
-			"查看Ipatches和提取未打补丁和打补丁的\nBootROM信息.\n"
-			"或通过 #C7EA46 Lockpick RCM# 转储每个key信息.\n");
+			"查看Ipatches, 并转储未打补丁和已打补丁版本的BootROM.\n"
+			"或者通过#C7EA46 Lockpick RCM#转储每个密钥.\n");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"查看Ipatches和提取未打补丁和打补丁的\nBootROM信息. 或通过 #C7EA46 Lockpick RCM# 转储每个key信息.\n"
-			"#FFDD00 bootloader/payloads/Lockpick_RCM.bin 丢失或已过时!#\n");
+			"查看Ipatches, 并转储未打补丁和已打补丁版本的BootROM.\n"
+			"或者通过#C7EA46 Lockpick RCM#转储每个密钥.\n"
+			"#FFDD00 bootloader/payloads/Lockpick_RCM.bin文件丢失或版本过旧!#\n");
 	}
 
 	lv_obj_set_style(label_txt2, &hint_small_style);
@@ -2534,7 +2535,7 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
 		"查看和提取缓存的 #C7EA46 Fuses# 和 #C7EA46 KFuses#信息.\n"
-		"Fuses包含了SoC/SKU和KFuses HDCP的keys信息.\n"
+		"Fuses包含了SoC/SKU和KFuses HDCP的密钥信息.\n"
 		"你也可以查看#C7EA46 DRAM#, #C7EA46 Screen# 和 #C7EA46 Touch panel#的信息.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);

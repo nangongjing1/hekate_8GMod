@@ -215,20 +215,20 @@ static lv_res_t _emmc_backup_buttons_raw_toggle(lv_obj_t *btn)
 		lv_obj_realign(emmc_btn_ctxt.emmc_boot);
 
 		if (!emmc_btn_ctxt.restore)
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  eMMC RAW GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  eMMC 原始GPP");
 		else
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  eMMC RAW GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  eMMC 原始GPP");
 		lv_obj_realign(emmc_btn_ctxt.emmc_raw_gpp);
 
 		if (!emmc_btn_ctxt.restore)
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC SYS");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC 系统");
 		else
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC ALL");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC 所有");
 		lv_obj_realign(emmc_btn_ctxt.emmc_sys);
 
 		if (!emmc_btn_ctxt.restore)
 		{
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_usr, NULL), SYMBOL_MODULES_ALT"  eMMC USER");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_usr, NULL), SYMBOL_MODULES_ALT"  eMMC 用户");
 			lv_obj_realign(emmc_btn_ctxt.emmc_usr);
 
 			lv_obj_set_click(emmc_btn_ctxt.emmc_usr, true);
@@ -246,9 +246,9 @@ static lv_res_t _emmc_backup_buttons_raw_toggle(lv_obj_t *btn)
 		lv_obj_realign(emmc_btn_ctxt.emmc_boot);
 
 		if (!emmc_btn_ctxt.restore)
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  SD emuMMC RAW GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  SD emuMMC 原始GPP");
 		else
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  SD emuMMC RAW GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  SD emuMMC 原始GPP");
 		lv_obj_realign(emmc_btn_ctxt.emmc_raw_gpp);
 
 		lv_obj_set_click(emmc_btn_ctxt.emmc_sys, false);
@@ -297,7 +297,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt = lv_label_create(h1, NULL);
-	lv_label_set_static_text(label_txt, "Full");
+	lv_label_set_static_text(label_txt, "全部");
 	lv_obj_set_style(label_txt, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI * 3 / 10);
 
@@ -325,16 +325,16 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt2,
-			"允许您备份 BOOT 物理分区.\n"
-			"包含BCT, keys和package1中的各种变量.\n"
-			"#FF8000 需要与RAW GPP备份数据配对.#");
+			"允许您备份BOOT物理分区.\n"
+			"它们包含BCT, 密钥和各种package1.\n"
+			"#FF8000 这些需要与原始GPP备份数据配对.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"允许您恢复 BOOT 物理分区.\n"
-			"包含BCT, keys和各种package1.\n"
-			"#FF8000 需要与RAW GPP恢复数据配对.#");
+			"允许您恢复BOOT物理分区.\n"
+			"它们包含BCT, 密钥和各种package1.\n"
+			"#FF8000 这些需要与原始GPP恢复数据配对.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -343,9 +343,9 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_obj_t *btn2 = lv_btn_create(h1, btn1);
 	label_btn = lv_label_create(btn2, NULL);
 	if (!emmc_btn_ctxt.restore)
-		lv_label_set_static_text(label_btn, SYMBOL_UPLOAD"  eMMC RAW GPP");
+		lv_label_set_static_text(label_btn, SYMBOL_UPLOAD"  eMMC 原始GPP");
 	else
-		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  eMMC RAW GPP");
+		lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  eMMC 原始GPP");
 	lv_obj_align(btn2, label_txt2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn2, LV_BTN_ACTION_CLICK, _emmc_backup_buttons_decider);
 	emmc_btn_ctxt.emmc_raw_gpp= btn2;
@@ -355,16 +355,16 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt2,
-			"允许您备份 GPP 物理分区.\n"
-			"它包含CAL0, 各种package2, SYSTEM, USER, 等等.\n"
-			"#FF8000 需要与BOOT0/1备份数据配对.#");
+			"允许您备份GPP物理分区.\n"
+			"它包含CAL0, 各种package2, 系统分区, 用户分区等.\n"
+			"#FF8000 这些需要与BOOT0/1分区备份数据配对.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt2,
-			"允许您恢复 GPP 物理分区.\n"
-			"它包含CAL0, 各种package2, SYSTEM, USER, 等等.\n"
-			"#FF8000 需要与BOOT0/1恢复数据配对.#");
+			"允许您恢复GPP物理分区.\n"
+			"它包含CAL0, 各种package2, 系统分区, 用户分区等.\n"
+			"#FF8000 这些需要与BOOT0/1分区恢复数据配对.#");
 	}
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -382,7 +382,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt3 = lv_label_create(h2, NULL);
-	lv_label_set_static_text(label_txt3, "GPP Partitions");
+	lv_label_set_static_text(label_txt3, "GPP 分区");
 	lv_obj_set_style(label_txt3, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI * 4 / 21);
 
@@ -394,9 +394,9 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	label_btn = lv_label_create(btn3, NULL);
 	lv_btn_set_fit(btn3, true, true);
 	if (!emmc_btn_ctxt.restore)
-		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC SYS");
+		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC 系统");
 	else
-		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC ALL");
+		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC 所有");
 	lv_obj_align(btn3, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn3, LV_BTN_ACTION_CLICK, _emmc_backup_buttons_decider);
 	emmc_btn_ctxt.emmc_sys = btn3;
@@ -406,15 +406,15 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	if (!emmc_btn_ctxt.restore)
 	{
 		lv_label_set_static_text(label_txt4,
-			"允许您从 RAW GPP 备份分区, 除了USER.\n"
-			"它包含CAL0, 各种package2, SYSTEM, 等等.\n"
+			"允许您备份原始GPP中除用户分区以外的分区.\n"
+			"它包含CAL0, 各种package2, 系统分区等.\n"
 			"#FF8000 这是一个不完整的备份.#");
 	}
 	else
 	{
 		lv_label_set_static_text(label_txt4,
-			"允许您从 RAW GPP 恢复分区\n"
-			"它包含CAL0, various package2, SYSTEM, USER, 等等.\n");
+			"允许您从原始GPP备份中恢复所有分区.\n"
+			"它包含CAL0, 各种package2, 系统分区, 用户分区等.\n");
 	}
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
@@ -425,7 +425,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	{
 		lv_obj_t *btn4 = lv_btn_create(h2, btn1);
 		label_btn = lv_label_create(btn4, NULL);
-		lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  eMMC USER");
+		lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  eMMC 用户");
 		lv_obj_align(btn4, label_txt4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 		lv_btn_set_action(btn4, LV_BTN_ACTION_CLICK, _emmc_backup_buttons_decider);
 		emmc_btn_ctxt.emmc_usr = btn4;
@@ -433,7 +433,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 		label_txt4 = lv_label_create(h2, NULL);
 		lv_label_set_recolor(label_txt4, true);
 		lv_label_set_static_text(label_txt4,
-			"允许您从 RAW GPP 备份 USER 分区.\n"
+			"允许您从原始GPP备份用户分区.\n"
 			"#FF8000 这是一个不完整的备份.#\n");
 		lv_obj_set_style(label_txt4, &hint_small_style);
 		lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -454,7 +454,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 
 	lv_obj_t *sd_emummc_raw = lv_btn_create(h3, NULL);
 	nyx_create_onoff_button(lv_theme_get_current(), h3,
-		sd_emummc_raw, SYMBOL_SD" SD emuMMC Raw Partition", _emmc_backup_buttons_raw_toggle, false);
+		sd_emummc_raw, SYMBOL_SD" SD卡emuMMC分区", _emmc_backup_buttons_raw_toggle, false);
 	emmc_btn_ctxt.raw_emummc = false;
 
 	return LV_RES_OK;

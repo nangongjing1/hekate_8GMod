@@ -799,7 +799,7 @@ bool nyx_emmc_check_battery_enough()
 		lv_obj_set_style(dark_bg, &mbox_darken);
 		lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-		static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+		static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 		lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 		lv_mbox_set_recolor_text(mbox, true);
 
@@ -826,7 +826,7 @@ static void _nyx_sd_card_issues(void *param)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
@@ -1027,7 +1027,7 @@ static void _nyx_emmc_issues(void *params)
 		lv_obj_set_style(dark_bg, &mbox_darken);
 		lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-		static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+		static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 		lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 		lv_mbox_set_recolor_text(mbox, true);
 
@@ -1083,8 +1083,8 @@ static lv_res_t _create_mbox_reload(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES * 4 / 10);
 
-	lv_mbox_set_text(mbox, "#FF8000 你真的想#\n#FF8000 重新加载hekate和Nyx?#\n\n"
-		"这个操作也会检查\n#96FF00 bootloader/update.bin#\n以更新");
+	lv_mbox_set_text(mbox, "#FF8000 您确定要#\n#FF8000 重新加载hekate和Nyx吗?#\n\n"
+		"这也会检查\n#96FF00 bootloader/update.bin#\n以获取hekate更新");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, reload_action);
 
@@ -1100,9 +1100,9 @@ static lv_res_t _create_mbox_reboot(lv_obj_t *btn)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\221原系统", "\221RCM", "\221取消", "" };
-	static const char * mbox_btn_map_autorcm[] = { "\261原系统", "\221RCM", "\221取消", "" };
-	static const char * mbox_btn_map_patched[] = { "\221原系统", "\221硬破", "\221取消", "" };
+	static const char * mbox_btn_map[] = { "\221官方系统", "\221RCM", "\221取消", "" };
+	static const char * mbox_btn_map_autorcm[] = { "\261官方系统", "\221RCM", "\221取消", "" };
+	static const char * mbox_btn_map_patched[] = { "\221官方系统", "\221正常", "\221取消", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 2);
@@ -1395,7 +1395,7 @@ static lv_res_t _create_mbox_payloads(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES * 5 / 9);
 
-	lv_mbox_set_text(mbox, "选择一个payload来启动:");
+	lv_mbox_set_text(mbox, "选择一个有效荷载来启动:");
 
 	// Create a list with all found payloads.
 	//! TODO: SHould that be tabs with buttons? + Icon support?
@@ -1960,7 +1960,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 	// Set tagline label.
 	lv_obj_t *label_tagline = lv_label_create(parent, NULL);
 	lv_obj_set_style(label_tagline, &hint_small_style_white);
-	lv_label_set_static_text(label_tagline, "满足您所有需求的一体式引导加载程序");
+	lv_label_set_static_text(label_tagline, "全能引导程序，满足您的一切需求");
 	lv_obj_set_pos(label_tagline, 50, 82);
 
 	static lv_style_t icons;
@@ -2027,7 +2027,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 	lv_btn_set_layout(btn_payloads, LV_LAYOUT_OFF);
 	lv_obj_align(label_btn, NULL, LV_ALIGN_CENTER, 0, -28);
 	label_btn2 = lv_label_create(btn_payloads, label_btn2);
-	s_printf(btn_colored_text, "%s%s", text_color, " Payloads#");
+	s_printf(btn_colored_text, "%s%s", text_color, " 有效载荷#");
 	lv_label_set_text(label_btn2, btn_colored_text);
 	lv_obj_set_pos(btn_payloads, 632, 160);
 	lv_obj_align(label_btn2, NULL, LV_ALIGN_IN_TOP_MID, 0, 174);
@@ -2069,7 +2069,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 
 static lv_res_t _save_options_action(lv_obj_t *btn)
 {
-	static const char * mbox_btn_map[] = {"\251", "\222OK!", "\251", ""};
+	static const char * mbox_btn_map[] = {"\251", "\222好的!", "\251", ""};
 	lv_obj_t * mbox = lv_mbox_create(lv_scr_act(), NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 

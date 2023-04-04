@@ -554,8 +554,8 @@ static lv_res_t _action_flash_linux_data(lv_obj_t * btns, const char * txt)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
-	static const char *mbox_btn_map2[] = { "\223删除安装文件", "\221OK", "" };
+	static const char *mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
+	static const char *mbox_btn_map2[] = { "\223删除安装文件", "\221好的", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 10 * 5);
@@ -598,7 +598,7 @@ static lv_res_t _action_flash_linux_data(lv_obj_t * btns, const char * txt)
 	res = f_open(&fp, path, FA_READ);
 	if (res)
 	{
-		lv_label_set_text(lbl_status, "#FFDD00 Error:# 打开第1部分失败!");
+		lv_label_set_text(lbl_status, "#FFDD00 错误:# 打开第1部分失败!");
 
 		goto exit;
 	}
@@ -641,7 +641,7 @@ static lv_res_t _action_flash_linux_data(lv_obj_t * btns, const char * txt)
 			res = f_open(&fp, path, FA_READ);
 			if (res)
 			{
-				s_printf(txt_buf, "#FFDD00 Error:# 打开第%d部分失败#", currPartIdx);
+				s_printf(txt_buf, "#FFDD00 错误:# 打开第%d部分失败#", currPartIdx);
 				lv_label_set_text(lbl_status, txt_buf);
 				manual_system_maintenance(true);
 
@@ -661,7 +661,7 @@ static lv_res_t _action_flash_linux_data(lv_obj_t * btns, const char * txt)
 
 		if (res)
 		{
-			lv_label_set_text(lbl_status, "#FFDD00 错误:# 从SD读取!");
+			lv_label_set_text(lbl_status, "#FFDD00 错误:# 从SD卡读取!");
 			manual_system_maintenance(true);
 
 			f_close(&fp);
@@ -682,7 +682,7 @@ static lv_res_t _action_flash_linux_data(lv_obj_t * btns, const char * txt)
 
 			if (retryCount >= 3)
 			{
-				lv_label_set_text(lbl_status, "#FFDD00 错误:# 往SD写入!");
+				lv_label_set_text(lbl_status, "#FFDD00 错误:# 往SD卡写入!");
 				manual_system_maintenance(true);
 
 				f_close(&fp);
@@ -822,7 +822,7 @@ static lv_res_t _action_check_flash_linux(lv_obj_t *btn)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char *mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	static const char *mbox_btn_map2[] = { "\222继续", "\222取消", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
@@ -983,7 +983,7 @@ static lv_res_t _action_flash_android_data(lv_obj_t * btns, const char * txt)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char *mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	static const char *mbox_btn_map2[] = { "\222继续", "\222取消", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
@@ -1386,7 +1386,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] =  { "\251", "\222OK", "\251", "" };
+	static const char *mbox_btn_map[] =  { "\251", "\222好的", "\251", "" };
 	static const char *mbox_btn_map1[] = { "\222SD UMS", "\222刷写 Linux", "\222刷写 Android", "\221OK", "" };
 	static const char *mbox_btn_map2[] = { "\222SD UMS", "\222刷写 Linux", "\221OK", "" };
 	static const char *mbox_btn_map3[] = { "\222SD UMS", "\222F刷写 Android", "\221OK", "" };
@@ -1419,7 +1419,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	lv_mbox_set_text(mbox,
 		"#FF8000 分区管理器#\n\n"
 		"#FFDD00 警告: 真的要继续吗?!#\n\n"
-		"按 #FF8000 POWER# 继续.\n按 #FF8000 VOL# 中止.");
+		"按#FF8000 电源键# 继续.\n按 #FF8000 音量键# 中止.");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	manual_system_maintenance(true);
 
@@ -1515,7 +1515,7 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	{
 		// Failed to format.
 		s_printf((char *)buf, "#FFDD00 错误:# 格式化磁盘(%d)失败!\n\n"
-			"取出SD卡并检查是否正常.\n如果不是,请将其格式化,重新插入并\n按 #FF8000 电源键#!", mkfs_error);
+			"取出SD卡并检查是否正常.\n如果不是, 请将其格式化, 重新插入并\n按 #FF8000 电源键#!", mkfs_error);
 
 		lv_label_set_text(lbl_status, (char *)buf);
 		lv_label_set_text(lbl_paths[0], " ");
@@ -1809,7 +1809,7 @@ static lv_res_t _action_slider_emu(lv_obj_t *slider)
 			if (slide_val != 10)
 				s_printf(lbl_text, "#FF3C28 %d GiB#", size >> 10);
 			else
-				s_printf(lbl_text, "#FF3C28 %d FULL#", size >> 10);
+				s_printf(lbl_text, "#FF3C28 %d 全部#", size >> 10);
 		}
 		else
 			s_printf(lbl_text, "#FFDD00 2x##FF3C28 %d#", size >> 11);
@@ -1992,8 +1992,8 @@ static void _create_mbox_check_files_total_size()
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
-	static const char *mbox_btn_map2[] = { "\222Don't Backup", "\222OK", "" };
+	static const char *mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
+	static const char *mbox_btn_map2[] = { "\222不备份", "\222好的", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
@@ -2108,10 +2108,10 @@ static void _create_mbox_check_files_total_size()
 
 	// Print partition table info.
 	s_printf(txt_buf,
-		"分区 0 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 1 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 2 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 3 - 类型: %02x, 起始地址: %08x, 大小: %08x",
+		"分区0 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区1 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区2 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区3 - 类型: %02x, 起始地址: %08x, 大小: %08x",
 		mbr.partitions[0].type, mbr.partitions[0].start_sct, mbr.partitions[0].size_sct,
 		mbr.partitions[1].type, mbr.partitions[1].start_sct, mbr.partitions[1].size_sct,
 		mbr.partitions[2].type, mbr.partitions[2].start_sct, mbr.partitions[2].size_sct,
@@ -2139,7 +2139,7 @@ static lv_res_t _action_fix_mbr(lv_obj_t *btn)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char *mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
@@ -2285,10 +2285,10 @@ check_changes:
 	// Current MBR info.
 	s_printf(txt_buf, "#00DDFF 当前MBR布局:#\n");
 	s_printf(txt_buf + strlen(txt_buf),
-		"分区 0 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 1 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 2 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 3 - 类型: %02x, 起始地址: %08x, 大小: %08x\n\n",
+		"分区0 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区1 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区2 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区3 - 类型: %02x, 起始地址: %08x, 大小: %08x\n\n",
 		mbr[0].partitions[0].type, mbr[0].partitions[0].start_sct, mbr[0].partitions[0].size_sct,
 		mbr[0].partitions[1].type, mbr[0].partitions[1].start_sct, mbr[0].partitions[1].size_sct,
 		mbr[0].partitions[2].type, mbr[0].partitions[2].start_sct, mbr[0].partitions[2].size_sct,
@@ -2297,10 +2297,10 @@ check_changes:
 	// New MBR info.
 	s_printf(txt_buf + strlen(txt_buf), "#00DDFF 新的MBR布局:#\n");
 	s_printf(txt_buf + strlen(txt_buf),
-		"分区 0 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 1 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 2 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
-		"分区 3 - 类型: %02x, 起始地址: %08x, 大小: %08x",
+		"分区0 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区1 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区2 - 类型: %02x, 起始地址: %08x, 大小: %08x\n"
+		"分区3 - 类型: %02x, 起始地址: %08x, 大小: %08x",
 		mbr[1].partitions[0].type, mbr[1].partitions[0].start_sct, mbr[1].partitions[0].size_sct,
 		mbr[1].partitions[1].type, mbr[1].partitions[1].start_sct, mbr[1].partitions[1].size_sct,
 		mbr[1].partitions[2].type, mbr[1].partitions[2].start_sct, mbr[1].partitions[2].size_sct,
@@ -2317,7 +2317,7 @@ check_changes:
 
 	lv_label_set_text(lbl_status,
 		"#FF8000 警告: 你真的要继续吗?!#\n\n"
-		"按 #FF8000 电源键# 继续.\n按 #FF8000 VOL# 中止.");
+		"按 #FF8000 电源键# 继续.\n按 #FF8000 音量键# 中止.");
 
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_top(mbox, true);
@@ -2496,7 +2496,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 
 	lv_obj_t *lbl = lv_label_create(h1, NULL);
 	lv_label_set_recolor(lbl, true);
-	lv_label_set_text(lbl, "选择 #FFDD00 新# 分区布局:");
+	lv_label_set_text(lbl, "选择 #FFDD00 新#分区布局:");
 
 	// Create disk layout blocks.
 	// HOS partition block.
@@ -2551,7 +2551,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	// Create slider type labels.
 	lv_obj_t *lbl_hos = lv_label_create(h1, NULL);
 	lv_label_set_recolor(lbl_hos, true);
-	lv_label_set_static_text(lbl_hos, "#96FF00 "SYMBOL_DOT" HOS (FAT32):#");
+	lv_label_set_static_text(lbl_hos, "#96FF00 "SYMBOL_DOT" 官方系统 (FAT32) :#");
 	lv_obj_align(lbl_hos, bar_hos, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 
 	lv_obj_t *lbl_emu = lv_label_create(h1, lbl_hos);
@@ -2642,9 +2642,9 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	lv_obj_t *lbl_notes = lv_label_create(h1, NULL);
 	lv_label_set_recolor(lbl_notes, true);
 	lv_label_set_static_text(lbl_notes,
-		"注 1: 最多只能备份#C7EA46 1GB#. 如果需要更多, 请在下一步手动备份它们.\n"
-		"注 2: 调整过大小的emuMMC会格式化USER分区. 你可使用存档数据管理器将其备份到其他地方.\n"
-		"注 3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写 Linux# 和 #C7EA46 刷写 Android# 将会刷入文件.\n");
+		"注1: 最多只能备份#C7EA46 1GB#数据. 如果超过此容量, 您将被要求在下一步手动备份.\n"
+		"注2: 调整大小的emuMMC会格式化用户分区. 可以使用存档数据管理器将它们移动到其他分区.\n"
+		"注3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写 Linux# 和 #C7EA46 刷写 Android# 将会刷入文件.\n");
 	lv_label_set_style(lbl_notes, &hint_small_style);
 	lv_obj_align(lbl_notes, lbl_and, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 

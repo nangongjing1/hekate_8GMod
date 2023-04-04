@@ -355,7 +355,7 @@ static lv_res_t _entries_columns_action(lv_obj_t *btn)
 
 static lv_res_t _save_nyx_options_action(lv_obj_t *btn)
 {
-	static const char * mbox_btn_map[] = {"\251", "\222OK!", "\251", ""};
+	static const char * mbox_btn_map[] = {"\251", "\222好的!", "\251", ""};
 	lv_obj_t * mbox = lv_mbox_create(lv_scr_act(), NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
@@ -619,7 +619,7 @@ static lv_res_t _create_window_nyx_colors(lv_obj_t *btn)
 		"Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
 		"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
 		"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
-		"nisi ut aliquip ex ea commodo consequat. (拉丁文, 暂不翻译)");
+		"nisi ut aliquip ex ea commodo consequat.");
 	lv_obj_set_width(lbl_test, lv_obj_get_width(h2) - LV_DPI * 6 / 10);
 	lv_obj_align(lbl_test, lbl_sample, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 	color_test.label = lbl_test;
@@ -738,7 +738,7 @@ static lv_res_t _create_mbox_clock_edit(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "输入nyx的#C7EA46 日期#和#C7EA46 时间# \n这不会改变实际的硬件时钟!");
+	lv_mbox_set_text(mbox, "输入Nyx的#C7EA46 日期#和#C7EA46 时间# \n这不会更改实际的硬件时钟!");
 
 	// Get current time.
 	rtc_time_t time;
@@ -921,7 +921,7 @@ disabled:;
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\251", "\222OK", "\251", "" };
+	static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
@@ -945,27 +945,27 @@ disabled:;
 
 		// Check if pairing was done in HOS.
 		if (is_l_hos && is_r_hos)
-			strcat(txt_buf, "#C7EA46 两个手柄配对数据均基于HOS!#");
+			strcat(txt_buf, "#C7EA46 两个手柄配对数据均基于官方系统!#");
 		else if (!is_l_hos && is_r_hos)
 		{
-			strcat(txt_buf, "#FF8000 警告:# #FFDD00 左手柄# 配对数据未基于HOS!");
+			strcat(txt_buf, "#FF8000 警告:##FFDD00 左手柄# 配对数据未基于官方系统!");
 			success = false;
 		}
 		else if (is_l_hos && !is_r_hos)
 		{
-			strcat(txt_buf, "#FF8000 警告:# #FFDD00 右手柄# 配对数据未基于HOS!");
+			strcat(txt_buf, "#FF8000 警告:##FFDD00 右手柄# 配对数据未基于官方系统!");
 			success = false;
 		}
 		else
 		{
-			strcat(txt_buf, "#FF8000 警告:# #FFDD00 左右手柄# 配对数据均未基于HOS!");
+			strcat(txt_buf, "#FF8000 警告:##FFDD00 左右手柄# 配对数据均未基于官方系统!");
 			success = false;
 		}
 
 		if (!success)
 			strcat(txt_buf,
 				"\n\n#FFDD00 确保两个 Joy-Con 都已连接,#\n"
-				"#FFDD00 并且在HOS系统中将它们配对!#");
+				"#FFDD00 并且在官方系统系统中将它们配对!#");
 	}
 	else
 	{
@@ -1153,7 +1153,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
 		"将启动项设置成每行5个. (默认是4)\n"
-		"#C7EA46 这可以在 启动 和 更多设置 里#\n"
+		"#C7EA46 这将允许在 启动 和 更多设置 里#\n"
 		"#C7EA46 显示总共10个启动项.#\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
@@ -1173,7 +1173,7 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"允许您保存 Switch 和 Joy-Con MAC 地址以及与之关联的 LTK信息\n"
+		"允许您保存Switch和Joy-Con的MAC地址以及与之关联的LTKs信息.\n"
 		"用于 #C7EA46 Android# 和 #C7EA46 Linux#.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
@@ -1200,8 +1200,8 @@ lv_res_t create_win_nyx_options(lv_obj_t *parrent_btn)
 	lv_ddlist_set_action(ddlist2, _data_verification_action);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
-	lv_label_set_static_text(label_txt2, "设置为备份和还原完成的数据验证类型.\n"
-		"可以取消而不会丢失备份/还原.\n");
+	lv_label_set_static_text(label_txt2, "设置备份和恢复所进行的数据验证类型.\n"
+		"可以取消而不会失去系统备份/恢复.\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, label_txt, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 4);
 
@@ -1294,7 +1294,7 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	autoboot_btn = btn;
 
 	lv_obj_t *label_txt2 = lv_label_create(sw_h2, NULL);
-	lv_label_set_static_text(label_txt2, "选择注入时自动启动的\n启动项或者payload.");
+	lv_label_set_static_text(label_txt2, "选择注入时自动启动的\n启动项或者有效载荷.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3 - 4);
 
@@ -1315,12 +1315,12 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	lv_ddlist_set_draw_arrow(ddlist, true);
 	lv_ddlist_set_options(ddlist,
 		"无启动标志    \n"
-		"1 秒\n"
-		"2 秒\n"
-		"3 秒\n"
-		"4 秒\n"
-		"5 秒\n"
-		"6 秒");
+		"1秒\n"
+		"2秒\n"
+		"3秒\n"
+		"4秒\n"
+		"5秒\n"
+		"6秒");
 	lv_ddlist_set_selected(ddlist, 3);
 	lv_obj_align(ddlist, label_txt, LV_ALIGN_OUT_RIGHT_MID, LV_DPI / 4, 0);
 	lv_ddlist_set_action(ddlist, _autoboot_delay_action);
@@ -1353,9 +1353,9 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 	label_txt2 = lv_label_create(sw_h2, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"若固件版本更高, 它会自动检查并自动使用\n"
-		"防熔断补丁. 它现在是一个全局配置\n"
-		"默认设置为自动. (ON: 自动)\n\n\n");
+		"若固件版本更高, 它会自动检查并应用防熔断补丁.\n"
+		"现在它是一个全局配置, 默认设置为自动."
+		"(ON:自动) \n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn2, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
@@ -1364,13 +1364,13 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	// Create Auto HOS Power Off button.
 	lv_obj_t *btn3 = lv_btn_create(sw_h3, NULL);
-	nyx_create_onoff_button(th, sw_h3, btn3, SYMBOL_POWER" 自动HOS关机", auto_hos_poweroff_toggle, true);
+	nyx_create_onoff_button(th, sw_h3, btn3, SYMBOL_POWER" 官方系统自动关机", auto_hos_poweroff_toggle, true);
 	lv_obj_align(btn3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_static_text(label_txt2,
-		"在HOS系统中关机后, 设备将在15s后唤起\n"
-		"补丁机选ON, 软破机无所谓.");
+		"在官方系统中关机后, 设备将在15秒后唤醒.\n"
+		"启用此选项可在下一次有效载荷注入时自动关闭电源.");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
@@ -1401,14 +1401,14 @@ void create_tab_options(lv_theme_t *th, lv_obj_t *parent)
 
 	// Create Update r2p button.
 	lv_obj_t *btn4 = lv_btn_create(sw_h3, NULL);
-	nyx_create_onoff_button(th, sw_h3, btn4, SYMBOL_REFRESH" 更新Reboot 2 Payload", _update_r2p_action, true);
+	nyx_create_onoff_button(th, sw_h3, btn4, SYMBOL_REFRESH" 更新reboot_payload", _update_r2p_action, true);
 	lv_obj_align(btn4, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 10);
 
 	label_txt2 = lv_label_create(sw_h3, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"如果在启动项选择了#FF8000 FSS0#, reboot 2 payload软件\n"
-		"的启动文件将会被检查并强制更新成hekate.\n\n\n\n");
+		"如果启动项使用#FF8000 FSS0#引导, 则会检查reboot_payload.bin"
+		"并强制以hekate启动.\n\n\n\n");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 12);
 
