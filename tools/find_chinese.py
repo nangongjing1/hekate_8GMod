@@ -4,7 +4,7 @@ import os
 
 allChineseWords = set({})
 
-paths = ['../nyx/nyx_gui/frontend', '../bdk/usb']
+paths = ['../nyx/nyx_gui/frontend/', '../bdk/usb/']
 for path in paths:
     for filename in os.listdir(path):
         if filename.endswith('.c'):
