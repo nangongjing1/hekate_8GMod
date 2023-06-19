@@ -232,7 +232,7 @@ static int _stat_and_copy_files(const char *src, const char *dst, char *path, u3
 		}
 		else // It's a directory.
 		{
-			if (!memcmp("系统卷标信息", fno.fname, 25))
+			if (!memcmp("System Volume Information", fno.fname, 25))
 				continue;
 
 			// Create folder to destination.
@@ -1387,9 +1387,9 @@ static lv_res_t _create_mbox_start_partitioning(lv_obj_t *btn)
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
 	static const char *mbox_btn_map[] =  { "\251", "\222好的", "\251", "" };
-	static const char *mbox_btn_map1[] = { "\222SD UMS", "\222刷写 Linux", "\222刷写 Android", "\221OK", "" };
-	static const char *mbox_btn_map2[] = { "\222SD UMS", "\222刷写 Linux", "\221OK", "" };
-	static const char *mbox_btn_map3[] = { "\222SD UMS", "\222F刷写 Android", "\221OK", "" };
+	static const char *mbox_btn_map1[] = { "\222SD UMS", "\222刷写 Linux", "\222刷写 Android", "\221好的", "" };
+	static const char *mbox_btn_map2[] = { "\222SD UMS", "\222刷写 Linux", "\221好的", "" };
+	static const char *mbox_btn_map3[] = { "\222SD UMS", "\222F刷写 Android", "\221好的", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
@@ -2573,7 +2573,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	lv_bar_set_value(slider_bar_hos, (part_info.total_sct - AU_ALIGN_SECTORS) / SECTORS_PER_GB);
 	lv_bar_set_style(slider_bar_hos, LV_SLIDER_STYLE_BG, &bar_hos_bg);
 	lv_bar_set_style(slider_bar_hos, LV_SLIDER_STYLE_INDIC, &bar_hos_ind);
-	lv_obj_align(slider_bar_hos, lbl_hos, LV_ALIGN_OUT_RIGHT_MID, LV_DPI * 6 / 4, 0);
+	lv_obj_align(slider_bar_hos, lbl_hos, LV_ALIGN_OUT_RIGHT_MID, LV_DPI * 6 / 6, 0);
 	part_info.slider_bar_hos = slider_bar_hos;
 
 	// Create emuMMC size slider.
@@ -2643,7 +2643,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	lv_label_set_recolor(lbl_notes, true);
 	lv_label_set_static_text(lbl_notes,
 		"注1: 最多只能备份#C7EA46 1GB#数据. 如果超过此容量, 您将被要求在下一步手动备份.\n"
-		"注2: 调整大小的emuMMC会格式化用户分区. 可以使用存档数据管理器将它们移动到其他分区.\n"
+		"注2: 调整emuMMC的大小会格式化用户分区. 可以使用存档数据管理器将它们移动到其他分区.\n"
 		"注3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写 Linux# 和 #C7EA46 刷写 Android# 将会刷入文件.\n");
 	lv_label_set_style(lbl_notes, &hint_small_style);
 	lv_obj_align(lbl_notes, lbl_and, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
