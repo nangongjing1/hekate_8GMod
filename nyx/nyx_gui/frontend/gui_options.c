@@ -1081,7 +1081,7 @@ disabled_or_cal0_issue:;
 					"#FFDD00 并且在官方系统系统中将它们配对!#");
 
 			if (cal_error)
-				s_printf(txt_buf + strlen(txt_buf), "\n\n#FF8000 警告：获取 IMU 校准失败 (%d)!#", cal_error);
+				s_printf(txt_buf + strlen(txt_buf), "\n\n#FF8000 警告: 获取 IMU 校准失败 (%d)!#", cal_error);
 		}
 		else
 		{
