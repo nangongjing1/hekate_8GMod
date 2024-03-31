@@ -794,7 +794,7 @@ bool nyx_emmc_check_battery_enough()
 		lv_obj_set_style(dark_bg, &mbox_darken);
 		lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-		static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
+		static const char * mbox_btn_map[] = { "\251", "\222确定", "\251", "" };
 		lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 		lv_mbox_set_recolor_text(mbox, true);
 
@@ -821,7 +821,7 @@ static void _nyx_sd_card_issues(void *param)
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
+	static const char * mbox_btn_map[] = { "\251", "\222确定", "\251", "" };
 	lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
@@ -1022,7 +1022,7 @@ static void _nyx_emmc_issues(void *params)
 		lv_obj_set_style(dark_bg, &mbox_darken);
 		lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-		static const char * mbox_btn_map[] = { "\251", "\222好的", "\251", "" };
+		static const char * mbox_btn_map[] = { "\251", "\222确定", "\251", "" };
 		lv_obj_t * mbox = lv_mbox_create(dark_bg, NULL);
 		lv_mbox_set_recolor_text(mbox, true);
 
@@ -1097,12 +1097,12 @@ static lv_res_t _create_mbox_reboot(lv_obj_t *btn)
 
 	static const char * mbox_btn_map[] = { "\221官方系统", "\221RCM", "\221取消", "" };
 	static const char * mbox_btn_map_autorcm[] = { "\261官方系统", "\221RCM", "\221取消", "" };
-	static const char * mbox_btn_map_patched[] = { "\221官方系统", "\221正常", "\221取消", "" };
+	static const char * mbox_btn_map_patched[] = { "\221官方系统", "\221正常模式", "\221取消", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 2);
 
-	lv_mbox_set_text(mbox, "#FF8000 选择重启后加载什么系统:#");
+	lv_mbox_set_text(mbox, "#FF8000 选择重启方式:#");
 
 	if (h_cfg.rcm_patched)
 		lv_mbox_add_btns(mbox, mbox_btn_map_patched, _reboot_action);
@@ -2061,7 +2061,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 
 static lv_res_t _save_options_action(lv_obj_t *btn)
 {
-	static const char * mbox_btn_map[] = {"\251", "\222好的!", "\251", ""};
+	static const char * mbox_btn_map[] = {"\251", "\222确定!", "\251", ""};
 	lv_obj_t * mbox = lv_mbox_create(lv_scr_act(), NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 
