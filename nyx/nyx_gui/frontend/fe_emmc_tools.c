@@ -563,7 +563,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 				}
 				else
 				{
-					s_printf(gui->txt_buf, "\n#FF0000 创建 partial.idx 文件时出现错误!#\n");
+					s_printf(gui->txt_buf, "\n#FF0000 创建partial.idx文件时出现错误!#\n");
 					lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 					manual_system_maintenance(true);
 
@@ -575,9 +575,9 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 				{
 					create_mbox_text(
 						"#96FF00 部分备份正在进行中!#\n\n"
-						"#96FF00 1.# 点击 OK 卸载 SD 卡.\n"
-						"#96FF00 2.# 取出 SD 卡并将文件移动到可用空间.\n"
-						"#FFDD00 请勿移动 partial.idx 文件!#\n"
+						"#96FF00 1.# 点击OK卸载SD卡.\n"
+						"#96FF00 2.# 取出SD卡并将文件移动到可用空间.\n"
+						"#FFDD00 请勿移动partial.idx文件!#\n"
 						"#96FF00 3.# 重新插入SD卡.\n"
 						"#96FF00 4.# 再次选择相同选项以继续.", true);
 
@@ -624,7 +624,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 		{
 			s_printf(gui->txt_buf,
 				"\n#FFDD00 从eMMC读取%d个块时出现错误,#\n"
-				"#FFDD00  LBA 为 %08X, (第 %d 次重试).#",
+				"#FFDD00  LBA为%08X, (第%d次重试).#",
 				num, lba_curr, ++retryCount);
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
@@ -655,7 +655,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 
 		if (res)
 		{
-			s_printf(gui->txt_buf, "\n#FF0000 写入SD卡时发生致命错误 (%d)#\n请重试...\n", res);
+			s_printf(gui->txt_buf, "\n#FF0000 写入SD卡时发生致命错误(%d)#\n请重试...\n", res);
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 
@@ -737,7 +737,7 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 
 		create_mbox_text(
 			"#96FF00 部分备份已完成!#\n\n"
-			"如果需要, 您现在可以将文件合并\n以获取完整的 eMMC RAW GPP 备份.", true);
+			"如果需要, 您现在可以将文件合并\n以获取完整的 eMMC RAW GPP备份.", true);
 
 		partial_sd_full_unmount = true;
 	}
@@ -1107,13 +1107,13 @@ multipart_not_allowed:
 	{
 		if (res != FR_NO_FILE)
 		{
-			s_printf(gui->txt_buf, "\n#FF0000 错误 (%d) 打开文件时出错. 继续中...#\n", res);
+			s_printf(gui->txt_buf, "\n#FF0000 错误(%d) 打开文件时出错. 继续中...#\n", res);
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 		}
 		else
 		{
-			s_printf(gui->txt_buf, "\n#FFDD00 错误 (%d) 文件未找到. 继续中...#\n", res);
+			s_printf(gui->txt_buf, "\n#FFDD00 错误(%d) 文件未找到. 继续中...#\n", res);
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);
 		}

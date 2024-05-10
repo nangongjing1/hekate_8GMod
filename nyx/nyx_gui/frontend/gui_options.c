@@ -1081,14 +1081,14 @@ disabled_or_cal0_issue:;
 					"#FFDD00 并且在官方系统系统中将它们配对!#");
 
 			if (cal_error)
-				s_printf(txt_buf + strlen(txt_buf), "\n\n#FF8000 警告: 获取 IMU 校准失败 (%d)!#", cal_error);
+				s_printf(txt_buf + strlen(txt_buf), "\n\n#FF8000 警告: 获取IMU校准失败 (%d)!#", cal_error);
 		}
 		else
 		{
 			s_printf(txt_buf,
 				"提取到SD卡完成!\n"
 				"已保存到: #C7EA46 switchroot/switch.cal#\n\n");
-			strcat(txt_buf, "#C7EA46 成功!#\n#C7EA46 找到Lite Gamepad数据!#\n");
+			strcat(txt_buf, "#C7EA46 成功!#\n#C7EA46 找到Lite手柄数据!#\n");
 		}
 	}
 	else
@@ -1096,7 +1096,7 @@ disabled_or_cal0_issue:;
 		if (!nx_hoag)
 			s_printf(txt_buf, "#FFDD00 提取Joy-Con配对数据失败!#\n#FFDD00 错误: %d#", error);
 		else
-			s_printf(txt_buf, "#FFDD00 获取Lite Gamepad数据失败!#\n#FFDD00 错误: %d#", error);
+			s_printf(txt_buf, "#FFDD00 获取Lite手柄数据失败!#\n#FFDD00 错误: %d#", error);
 	}
 
 	lv_mbox_set_text(mbox, txt_buf);

@@ -230,7 +230,7 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 5);
 
-	lv_mbox_set_text(mbox, "#C7EA46 CAL0 信息#");
+	lv_mbox_set_text(mbox, "#C7EA46 CAL0信息#");
 
 	char *txt_buf = (char *)malloc(SZ_16K);
 	txt_buf[0] = 0;
@@ -255,7 +255,7 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 	}
 	else if (cal0_res == 2)
 	{
-		lv_label_set_text(lb_desc, "#FFDD00 CAL0 被污染或错误的密钥!#\n");
+		lv_label_set_text(lb_desc, "#FFDD00 CAL0被污染或错误的密钥!#\n");
 		goto out;
 	}
 
@@ -265,13 +265,13 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 	se_calc_sha256_oneshot(hash, (u8 *)cal0 + 0x40, cal0->body_size);
 
 	s_printf(txt_buf,
-		"#FF8000 CAL0 Version:#      %d\n"
-		"#FF8000 Update Count:#      %d\n"
-		"#FF8000 Serial Number:#     %s\n"
-		"#FF8000 WLAN MAC:#          %02X:%02X:%02X:%02X:%02X:%02X\n"
-		"#FF8000 Bluetooth MAC:#     %02X:%02X:%02X:%02X:%02X:%02X\n"
-		"#FF8000 Battery LOT:#       %s (%d)\n"
-		"#FF8000 LCD Vendor:#        ",
+		"#FF8000 CAL0版本:#          %d\n"
+		"#FF8000 更新次数:#          %d\n"
+		"#FF8000 序列号:#            %s\n"
+		"#FF8000 WLAN MAC地址:#      %02X:%02X:%02X:%02X:%02X:%02X\n"
+		"#FF8000 蓝牙MAC地址:#       %02X:%02X:%02X:%02X:%02X:%02X\n"
+		"#FF8000 电池批号:#          %s (%d)\n"
+		"#FF8000 显示屏供应商:#      ",
 		cal0->version, cal0->update_cnt, cal0->serial_number,
 		cal0->wlan_mac[0], cal0->wlan_mac[1], cal0->wlan_mac[2], cal0->wlan_mac[3], cal0->wlan_mac[4], cal0->wlan_mac[5],
 		cal0->bd_mac[0], cal0->bd_mac[1], cal0->bd_mac[2], cal0->bd_mac[3], cal0->bd_mac[4], cal0->bd_mac[5],
@@ -288,22 +288,22 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 		strcat(txt_buf, "JDI LPM062M326A");
 		break;
 	case PANEL_INL_P062CCA_AZ1:
-		strcat(txt_buf, "InnoLux P062CCA-AZX");
+		strcat(txt_buf, "群创 P062CCA-AZX");
 		break;
 	case PANEL_AUO_A062TAN01:
-		strcat(txt_buf, "AUO A062TAN0X");
+		strcat(txt_buf, "友达 A062TAN0X");
 		break;
 	case PANEL_INL_2J055IA_27A:
-		strcat(txt_buf, "InnoLux 2J055IA-27A");
+		strcat(txt_buf, "群创 2J055IA-27A");
 		break;
 	case PANEL_AUO_A055TAN01:
-		strcat(txt_buf, "AUO A055TAN0X");
+		strcat(txt_buf, "友达 A055TAN0X");
 		break;
 	case PANEL_SHP_LQ055T1SW10:
-		strcat(txt_buf, "Sharp LQ055T1SW10");
+		strcat(txt_buf, "夏普 LQ055T1SW10");
 		break;
 	case PANEL_SAM_AMS699VC01:
-		strcat(txt_buf, "Samsung AMS699VC01");
+		strcat(txt_buf, "三星 AMS699VC01");
 		break;
 	default:
 		switch (cal0->lcd_vendor & 0xFF)
@@ -313,29 +313,29 @@ static lv_res_t _create_mbox_cal0(lv_obj_t *btn)
 			strcat(txt_buf, "JDI ");
 			break;
 		case (PANEL_INL_P062CCA_AZ1 & 0xFF):
-			strcat(txt_buf, "InnoLux ");
+			strcat(txt_buf, "群创 ");
 			break;
 		case (PANEL_AUO_A062TAN01 & 0xFF):
-			strcat(txt_buf, "AUO ");
+			strcat(txt_buf, "友达 ");
 			break;
 		case (PANEL_SAM_AMS699VC01 & 0xFF):
-			strcat(txt_buf, "Samsung ");
+			strcat(txt_buf, "三星 ");
 			break;
 		}
-		strcat(txt_buf, "Unknown");
+		strcat(txt_buf, "未知");
 		break;
 	}
 
 	s_printf(txt_buf + strlen(txt_buf),
-		" (%06X)\n#FF8000 Touch Vendor:#      %d\n"
-		"#FF8000 IMU Type/Mount:#    %d / %d\n"
-		"#FF8000 Stick L/R Type:#    %02X / %02X\n",
+		" (%06X)\n#FF8000 触控屏供应商:#      %d\n"
+		"#FF8000 IMU类型/安装位置:#  %d / %d\n"
+		"#FF8000 摇杆左/右类型:#     %02X / %02X\n",
 		cal0->lcd_vendor, cal0->touch_ic_vendor_id,
 		cal0->console_6axis_sensor_type, cal0->console_6axis_sensor_mount_type,
 		cal0->analog_stick_type_l, cal0->analog_stick_type_r);
 
 	bool valid_cal0 = !memcmp(hash, cal0->body_sha256, 0x20);
-	s_printf(txt_buf + strlen(txt_buf), "#FF8000 SHA256 Hash Match:# %s", valid_cal0 ? "Pass" : "Failed");
+	s_printf(txt_buf + strlen(txt_buf), "#FF8000 SHA256哈希校验:#    %s", valid_cal0 ? "通过" : "失败");
 
 	lv_label_set_text(lb_desc, txt_buf);
 
@@ -355,7 +355,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 {
 	lv_obj_t *win = nyx_create_standard_window(SYMBOL_CHIP" 硬件和Fuses信息");
 	lv_win_add_btn(win, NULL, SYMBOL_DOWNLOAD" 提取fuses信息", _fuse_dump_window_action);
-	lv_win_add_btn(win, NULL, SYMBOL_INFO" CAL0 信息", _create_mbox_cal0);
+	lv_win_add_btn(win, NULL, SYMBOL_INFO" CAL0信息", _create_mbox_cal0);
 
 	lv_obj_t *desc = lv_cont_create(win, NULL);
 	lv_obj_set_size(desc, LV_HOR_RES / 2 / 5 * 2, LV_VER_RES - (LV_DPI * 11 / 7) - 5);
@@ -366,33 +366,33 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 	lv_label_set_style(lb_desc, &monospace_text);
 
 	lv_label_set_static_text(lb_desc,
-		"SKU:\n"
-		"DRAM ID:\n"
-		"#FF8000 Burnt Fuses (ODM 7/6):#\n"
-		"ODM Fields (4, 6, 7):\n"
-		"Secure Boot Key (SBK):\n"
-		"Device Key (DK):\n"
-		"Public Key (PK SHA256):\n\n"
-		"HOS Keygen Revision:\n"
-		"USB Stack:\n"
-		"Final Test Revision:\n"
-		"Chip Probing Revision:\n"
-		"CPU Speedo 0 (CPU Val):\n"
-		"CPU Speedo 1:\n"
-		"CPU Speedo 2 (GPU Val):\n"
-		"SoC Speedo 0 (SoC Val):\n"
-		"SoC Speedo 1 (BROM rev):\n"
-		"SoC Speedo 2:\n"
-		"CPU IDDQ Val:\n"
-		"SoC IDDQ Val:\n"
-		"Gpu IDDQ Val:\n"
-		"Vendor Code:\n"
-		"FAB Code:\n"
-		"LOT Code 0:\n"
-		"Wafer ID:\n"
-		"X Coordinate:\n"
-		"Y Coordinate:\n"
-		"#FF8000 Chip ID Revision:#"
+		"SKU编号:\n"
+		"DRAM标识:\n"
+		"#FF8000 熔断计数(ODM 7/6):#\n"
+		"ODM字段(4, 6, 7):\n"
+		"安全启动密钥(SBK):\n"
+		"设备密钥(DK):\n"
+		"公钥(PK SHA256):\n\n"
+		"操作系统密钥生成修订版本:\n"
+		"USB栈:\n"
+		"最终测试修订版本:\n"
+		"芯片探测修订版本:\n"
+		"CPU速度计0(CPU值):\n"
+		"CPU速度计1:\n"
+		"CPU速度计2(GPU值):\n"
+		"SoC速度计0(SoC值):\n"
+		"SoC速度计1(BROM版本):\n"
+		"SoC速度计2:\n"
+		"CPU IDDQ值:\n"
+		"SoC IDDQ值:\n"
+		"GPU IDDQ值:\n"
+		"供应商代码:\n"
+		"制造厂代码:\n"
+		"批次代码 0:\n"
+		"晶圆ID:\n"
+		"X 坐标:\n"
+		"Y 坐标:\n"
+		"#FF8000 芯片ID修订版本:#"
 	);
 	lv_obj_set_width(lb_desc, lv_obj_get_width(desc));
 
@@ -424,7 +424,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		sku = "Aula (Mariko)";
 		break;
 	default:
-		sku = "#FF8000 Unknown#";
+		sku = "#FF8000 未知#";
 		break;
 	}
 
@@ -435,22 +435,22 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		{
 		// LPDDR4 3200Mbps.
 		case LPDDR4_ICOSA_4GB_SAMSUNG_K4F6E304HB_MGCH:
-			strcpy(dram_man, "Samsung K4F6E304HB-MGCH 4GB");
+			strcpy(dram_man, "三星 K4F6E304HB-MGCH 4GB");
 			break;
 		case LPDDR4_ICOSA_4GB_HYNIX_H9HCNNNBPUMLHR_NLE:
-			strcpy(dram_man, "Hynix H9HCNNNBPUMLHR-NLE 4GB");
+			strcpy(dram_man, "海力士 H9HCNNNBPUMLHR-NLE 4GB");
 			break;
 		case LPDDR4_ICOSA_4GB_MICRON_MT53B512M32D2NP_062_WTC:
-			strcpy(dram_man, "Micron MT53B512M32D2NP-062 WT:C");
+			strcpy(dram_man, "美光 MT53B512M32D2NP-062 WT:C");
 			break;
 		case LPDDR4_ICOSA_6GB_SAMSUNG_K4FHE3D4HM_MGCH:
-			strcpy(dram_man, "Samsung K4FHE3D4HM-MGCH 6GB");
+			strcpy(dram_man, "三星 K4FHE3D4HM-MGCH 6GB");
 			break;
 		case LPDDR4_ICOSA_8GB_SAMSUNG_K4FBE3D4HM_MGXX:
-			strcpy(dram_man, "Samsung K4FBE3D4HM-MGXX 8GB");
+			strcpy(dram_man, "三星 K4FBE3D4HM-MGXX 8GB");
 			break;
 		default:
-			strcpy(dram_man, "#FF8000 Unknown#");
+			strcpy(dram_man, "#FF8000 未知#");
 			break;
 		}
 	}
@@ -461,60 +461,60 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		// LPDDR4X 3733Mbps.
 		case LPDDR4X_IOWA_4GB_SAMSUNG_K4U6E3S4AM_MGCJ:
 		case LPDDR4X_HOAG_4GB_SAMSUNG_K4U6E3S4AM_MGCJ:
-			strcpy(dram_man, "Samsung K4U6E3S4AM-MGCJ 4GB");
+			strcpy(dram_man, "三星 K4U6E3S4AM-MGCJ 4GB");
 			break;
 		case LPDDR4X_IOWA_8GB_SAMSUNG_K4UBE3D4AM_MGCJ:
 		case LPDDR4X_HOAG_8GB_SAMSUNG_K4UBE3D4AM_MGCJ:
-			strcpy(dram_man, "Samsung K4UBE3D4AM-MGCJ 8GB");
+			strcpy(dram_man, "三星 K4UBE3D4AM-MGCJ 8GB");
 			break;
 		case LPDDR4X_IOWA_4GB_HYNIX_H9HCNNNBKMMLHR_NME:
 		case LPDDR4X_HOAG_4GB_HYNIX_H9HCNNNBKMMLHR_NME:
-			strcpy(dram_man, "Hynix H9HCNNNBKMMLHR-NME 4GB");
+			strcpy(dram_man, "海力士 H9HCNNNBKMMLHR-NME 4GB");
 			break;
 		case LPDDR4X_IOWA_4GB_MICRON_MT53E512M32D2NP_046_WTE: // 4266Mbps.
 		case LPDDR4X_HOAG_4GB_MICRON_MT53E512M32D2NP_046_WTE: // 4266Mbps.
-			strcpy(dram_man, "Micron MT53E512M32D2NP-046 WT:E");
+			strcpy(dram_man, "美光 MT53E512M32D2NP-046 WT:E");
 			break;
 
 		// LPDDR4X 4266Mbps
 		case LPDDR4X_IOWA_4GB_SAMSUNG_K4U6E3S4AA_MGCL:
 		case LPDDR4X_HOAG_4GB_SAMSUNG_K4U6E3S4AA_MGCL:
 		case LPDDR4X_AULA_4GB_SAMSUNG_K4U6E3S4AA_MGCL:
-			strcpy(dram_man, "Samsung K4U6E3S4AA-MGCL 4GB");
+			strcpy(dram_man, "三星 K4U6E3S4AA-MGCL 4GB");
 			break;
 		case LPDDR4X_IOWA_8GB_SAMSUNG_K4UBE3D4AA_MGCL:
 		case LPDDR4X_HOAG_8GB_SAMSUNG_K4UBE3D4AA_MGCL:
 		case LPDDR4X_AULA_8GB_SAMSUNG_K4UBE3D4AA_MGCL:
-			strcpy(dram_man, "Samsung K4UBE3D4AA-MGCL 8GB");
+			strcpy(dram_man, "三星 K4UBE3D4AA-MGCL 8GB");
 			break;
 		case LPDDR4X_IOWA_4GB_SAMSUNG_K4U6E3S4AB_MGCL:
 		case LPDDR4X_HOAG_4GB_SAMSUNG_K4U6E3S4AB_MGCL:
 		case LPDDR4X_AULA_4GB_SAMSUNG_K4U6E3S4AB_MGCL:
-			strcpy(dram_man, "Samsung K4U6E3S4AB-MGCL 4GB");
+			strcpy(dram_man, "三星 K4U6E3S4AB-MGCL 4GB");
 			break;
 		case LPDDR4X_IOWA_4GB_MICRON_MT53E512M32D2NP_046_WTF:
 		case LPDDR4X_HOAG_4GB_MICRON_MT53E512M32D2NP_046_WTF:
 		case LPDDR4X_AULA_4GB_MICRON_MT53E512M32D2NP_046_WTF:
-			strcpy(dram_man, "Micron MT53E512M32D2NP-046 WT:F");
+			strcpy(dram_man, "美光 MT53E512M32D2NP-046 WT:F");
 			break;
 		case LPDDR4X_HOAG_4GB_HYNIX_H9HCNNNBKMMLXR_NEE: // Replaced from Copper.
 		case LPDDR4X_AULA_4GB_HYNIX_H9HCNNNBKMMLXR_NEE: // Replaced from Copper.
 		case LPDDR4X_IOWA_4GB_HYNIX_H9HCNNNBKMMLXR_NEE: // Replaced from Copper.
-			strcpy(dram_man, "Hynix H9HCNNNBKMMLXR-NEE 4GB");
+			strcpy(dram_man, "海力士 H9HCNNNBKMMLXR-NEE 4GB");
 			break;
 		case LPDDR4X_IOWA_4GB_HYNIX_H54G46CYRBX267:
 		case LPDDR4X_HOAG_4GB_HYNIX_H54G46CYRBX267:
 		case LPDDR4X_AULA_4GB_HYNIX_H54G46CYRBX267:
-			strcpy(dram_man, "Hynix H54G46CYRBX267 4GB");
+			strcpy(dram_man, "海力士 H54G46CYRBX267 4GB");
 			break;
 		case LPDDR4X_IOWA_4GB_MICRON_MT53E512M32D1NP_046_WTB:
 		case LPDDR4X_HOAG_4GB_MICRON_MT53E512M32D1NP_046_WTB:
 		case LPDDR4X_AULA_4GB_MICRON_MT53E512M32D1NP_046_WTB:
-			strcpy(dram_man, "Micron MT53E512M32D1NP-046 WT:B");
+			strcpy(dram_man, "美光 MT53E512M32D1NP-046 WT:B");
 			break;
 
 		default:
-			strcpy(dram_man, "#FF8000 Contact me!#");
+			strcpy(dram_man, "#FF8000 请联系作者!#");
 			break;
 		}
 	}
@@ -530,7 +530,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 	switch (burnt_fuses_hos)
 	{
 	case 0:
-		strcpy(fuses_hos_version, "#96FF00 Golden sample#");
+		strcpy(fuses_hos_version, "#96FF00 标准样品#");
 		break;
 	case 1:
 		strcpy(fuses_hos_version, "1.0.0");
@@ -590,10 +590,10 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		strcpy(fuses_hos_version, "17.0.0+");
 		break;
 	case 255:
-		strcpy(fuses_hos_version, "#FFD000 Overburnt#");
+		strcpy(fuses_hos_version, "#FFD000 超出正常熔断次数#");
 		break;
 	default:
-		strcpy(fuses_hos_version, "#FF8000 Unknown#");
+		strcpy(fuses_hos_version, "#FF8000 未知#");
 		break;
 	}
 
@@ -611,11 +611,11 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 	u32 chip_id = APB_MISC(APB_MISC_GP_HIDREV);
 	// Parse fuses and display them.
 	s_printf(txt_buf,
-		"%X - %s - %s\n%02d: %s\n%d - %d (HOS: %s)\n%08X %08X %08X\n%08X%08X%08X%08X\n%08X\n%08X%08X%08X%08X\n%08X%08X%08X%08X\n%d\n"
+		"%X - %s - %s\n%02d: %s\n%d - %d (官方系统: %s)\n%08X %08X %08X\n%08X%08X%08X%08X\n%08X\n%08X%08X%08X%08X\n%08X%08X%08X%08X\n%d\n"
 		"%s\n%d.%02d (0x%X)\n%d.%02d (0x%X)\n%d\n%d\n%d\n%d\n0x%X\n%d\n%d (%d)\n%d (%d)\n%d (%d)\n"
 		"%d\n%d\n%d (0x%X)\n%d\n%d\n%d\n"
-		"ID: %02X, Major: %d, Minor: A%02d",
-		FUSE(FUSE_SKU_INFO), sku, fuse_read_hw_state() ? "Dev" : "Retail",
+		"ID: %02X, 主版本号: %d, 次版本号: A%02d",
+		FUSE(FUSE_SKU_INFO), sku, fuse_read_hw_state() ? "开发版" : "零售版",
 		dram_id, dram_man, burnt_fuses_7, burnt_fuses_6, fuses_hos_version,
 		fuse_read_odm(4), fuse_read_odm(6), fuse_read_odm(7),
 		byte_swap_32(FUSE(FUSE_PRIVATE_KEY0)), byte_swap_32(FUSE(FUSE_PRIVATE_KEY1)),
@@ -658,11 +658,11 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 	u32 ranks    = EMC(EMC_ADR_CFG) + 1;
 	u32 channels = (EMC(EMC_FBIO_CFG7) >> 1) & 3;
 	channels = (channels & 1) + ((channels & 2) >> 1);
-	s_printf(txt_buf, "#00DDFF %s SDRAM ##FF8000 (Ch 0 | Ch 1):#\n#FF8000 Vendor:# ", h_cfg.t210b01 ? "LPDDR4X" : "LPDDR4");
+	s_printf(txt_buf, "#00DDFF %s SDRAM ##FF8000 (Ch 0 | Ch 1):#\n#FF8000 供应商:# ", h_cfg.t210b01 ? "LPDDR4X" : "LPDDR4");
 	switch (ram_vendor.chip0.rank0_ch0)
 	{
 	case 1:
-		strcat(txt_buf, "Samsung");
+		strcat(txt_buf, "三星");
 		break;
 /*
 	case 5:
@@ -670,7 +670,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		break;
 */
 	case 6:
-		strcat(txt_buf, "Hynix");
+		strcat(txt_buf, "海力士");
 		break;
 /*
 	case 8:
@@ -708,29 +708,29 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		break;
  */
 	case 255:
-		strcat(txt_buf, "Micron");
+		strcat(txt_buf, "美光");
 		break;
 	default:
-		s_printf(txt_buf + strlen(txt_buf), "#FF8000 Unknown# (%d)", ram_vendor.chip0.rank0_ch0);
+		s_printf(txt_buf + strlen(txt_buf), "#FF8000 未知# (%d)", ram_vendor.chip0.rank0_ch0);
 		break;
 	}
 	strcat(txt_buf, " #FF8000 |# ");
 	switch (ram_vendor.chip1.rank0_ch0)
 	{
 	case 1:
-		strcat(txt_buf, "Samsung");
+		strcat(txt_buf, "三星");
 		break;
 	case 6:
-		strcat(txt_buf, "Hynix");
+		strcat(txt_buf, "海力士");
 		break;
 	case 255:
-		strcat(txt_buf, "Micron");
+		strcat(txt_buf, "美光");
 		break;
 	default:
-		s_printf(txt_buf + strlen(txt_buf), "#FF8000 Unknown# (%d)", ram_vendor.chip1.rank0_ch0);
+		s_printf(txt_buf + strlen(txt_buf), "#FF8000 未知# (%d)", ram_vendor.chip1.rank0_ch0);
 		break;
 	}
-	s_printf(txt_buf + strlen(txt_buf), "\n#FF8000 Rev ID:#  %X.%02X #FF8000 |# %X.%02X\n#FF8000 Density:# %d",
+	s_printf(txt_buf + strlen(txt_buf), "\n#FF8000 版本号:#  %X.%02X #FF8000 |# %X.%02X\n#FF8000 存储密度:# %d",
 		ram_rev0.chip0.rank0_ch0, ram_rev1.chip0.rank0_ch0, ram_rev0.chip1.rank0_ch0, ram_rev1.chip1.rank0_ch0, ranks * channels);
 	switch ((ram_density.chip0.rank0_ch0 & 0x3C) >> 2)
 	{
@@ -750,7 +750,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		strcat(txt_buf, " x 2GB");
 		break;
 	default:
-		s_printf(txt_buf + strlen(txt_buf), " x Unk (%d)", (ram_density.chip0.rank0_ch0 & 0x3C) >> 2);
+		s_printf(txt_buf + strlen(txt_buf), " x 未知 (%d)", (ram_density.chip0.rank0_ch0 & 0x3C) >> 2);
 		break;
 	}
 	s_printf(txt_buf + strlen(txt_buf), " #FF8000 |# %d", ranks * channels);
@@ -772,7 +772,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		strcat(txt_buf, " x 2GB");
 		break;
 	default:
-		s_printf(txt_buf + strlen(txt_buf), " x Unk (%d)", (ram_density.chip1.rank0_ch0 & 0x3C) >> 2);
+		s_printf(txt_buf + strlen(txt_buf), " x 未知 (%d)", (ram_density.chip1.rank0_ch0 & 0x3C) >> 2);
 		break;
 	}
 	strcat(txt_buf, "\n\n");
@@ -781,7 +781,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 	u8  display_rev = (nyx_str->info.disp_id >> 8) & 0xFF;
 	u32 display_id = ((nyx_str->info.disp_id >> 8) & 0xFF00) | (nyx_str->info.disp_id & 0xFF);
 
-	strcat(txt_buf, "#00DDFF Display Panel:#\n#FF8000 Model:# ");
+	strcat(txt_buf, "#00DDFF 显示面板:#\n#FF8000 型号:# ");
 
 	switch (display_id)
 	{
@@ -792,7 +792,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		strcat(txt_buf, "JDI LPM062M326A");
 		break;
 	case PANEL_INL_P062CCA_AZ1:
-		strcat(txt_buf, "InnoLux P062CCA");
+		strcat(txt_buf, "群创 P062CCA");
 		switch (display_rev)
 		{
 		case 0x93:
@@ -814,12 +814,12 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcat(txt_buf, "-???");
 			break;
 		default:
-			strcat(txt_buf, " #FFDD00 Contact me!#");
+			strcat(txt_buf, " #FFDD00 请联系作者!#");
 			break;
 		}
 		break;
 	case PANEL_AUO_A062TAN01:
-		strcat(txt_buf, "AUO A062TAN");
+		strcat(txt_buf, "友达 A062TAN");
 		switch (display_rev)
 		{
 		case 0x93:
@@ -841,34 +841,34 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcat(txt_buf, "??");
 			break;
 		default:
-			strcat(txt_buf, " #FFDD00 Contact me!#");
+			strcat(txt_buf, " #FFDD00 请联系作者!#");
 			break;
 		}
 		break;
 	case PANEL_INL_2J055IA_27A:
-		strcat(txt_buf, "InnoLux 2J055IA-27A");
+		strcat(txt_buf, "群创 2J055IA-27A");
 		break;
 	case PANEL_AUO_A055TAN01:
-		strcat(txt_buf, "AUO A055TAN");
+		strcat(txt_buf, "友达 A055TAN");
 		s_printf(txt_buf + strlen(txt_buf), "%02d", display_rev - 0x92);
 		break;
 	case PANEL_SHP_LQ055T1SW10:
-		strcat(txt_buf, "Sharp LQ055T1SW10");
+		strcat(txt_buf, "夏普 LQ055T1SW10");
 		break;
 	case PANEL_SAM_AMS699VC01:
-		strcat(txt_buf, "Samsung AMS699VC01");
+		strcat(txt_buf, "三星 AMS699VC01");
 		break;
 	case PANEL_OEM_CLONE_6_2:
-		strcat(txt_buf, "#FFDD00 OEM Clone 6.2\"#");
+		strcat(txt_buf, "#FFDD00 OEM克隆6.2英寸\"#");
 		break;
 	case PANEL_OEM_CLONE_5_5:
-		strcat(txt_buf, "#FFDD00 OEM Clone 5.5\"#");
+		strcat(txt_buf, "#FFDD00 OEM克隆5.5英寸\"#");
 		break;
 	case PANEL_OEM_CLONE:
-		strcat(txt_buf, "#FFDD00 OEM Clone#");
+		strcat(txt_buf, "#FFDD00 OEM克隆#");
 		break;
 	case 0xCCCC:
-		strcat(txt_buf, "#FFDD00 Failed to get info!#");
+		strcat(txt_buf, "#FFDD00 获取信息失败!#");
 		break;
 	default:
 		switch (display_id & 0xFF)
@@ -877,16 +877,16 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 			strcat(txt_buf, "JDI ");
 			break;
 		case (PANEL_INL_P062CCA_AZ1 & 0xFF):
-			strcat(txt_buf, "InnoLux ");
+			strcat(txt_buf, "群创 ");
 			break;
 		case (PANEL_AUO_A062TAN01 & 0xFF):
-			strcat(txt_buf, "AUO ");
+			strcat(txt_buf, "友达 ");
 			break;
 		case (PANEL_SAM_AMS699VC01 & 0xFF):
-			strcat(txt_buf, "Samsung ");
+			strcat(txt_buf, "三星 ");
 			break;
 		}
-		strcat(txt_buf, "Unknown #FFDD00 Contact me!#");
+		strcat(txt_buf, "未知 #FFDD00 请联系作者!#");
 		break;
 	}
 
@@ -900,14 +900,14 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 	// Prepare touch panel/ic info.
 	if (!touch_get_fw_info(&touch_fw))
 	{
-		strcat(txt_buf, "\n\n#00DDFF Touch Panel:#\n#FF8000 Model:# ");
+		strcat(txt_buf, "\n\n#00DDFF 触摸面板:#\n#FF8000 型号:# ");
 
 		touch_panel = touch_get_panel_vendor();
 		if (touch_panel)
 		{
 			if ((u8)touch_panel->idx == (u8)-2) // Touch panel not found, print gpios.
 			{
-				s_printf(txt_buf + strlen(txt_buf), "%2X%2X%2X #FFDD00 Contact me!#",
+				s_printf(txt_buf + strlen(txt_buf), "%2X%2X%2X #FFDD00 请联系作者!#",
 					touch_panel->gpio0, touch_panel->gpio1, touch_panel->gpio2);
 				touch_panel = NULL;
 			}
@@ -915,7 +915,7 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 				strcat(txt_buf, touch_panel->vendor);
 		}
 		else
-			strcat(txt_buf, "#FFDD00 Error!#");
+			strcat(txt_buf, "#FFDD00 错误!#");
 
 		s_printf(txt_buf + strlen(txt_buf), "\n#FF8000 ID:# %08X (", touch_fw.fw_id);
 
@@ -965,15 +965,15 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 		case 0x33000510:
 			strcat(txt_buf, "4CD60D/5");
 			if (touch_panel)
-				panel_ic_paired = touch_panel->idx == 4; // Samsung BH2109.
+				panel_ic_paired = touch_panel->idx == 4; // 三星 BH2109.
 			break;
 		default:
-			strcat(txt_buf, "#FF8000 Unknown#");
+			strcat(txt_buf, "#FF8000 未知#");
 			break;
 		}
 
-		s_printf(txt_buf + strlen(txt_buf), " - %s)\n#FF8000 FTB ver:# %04X\n#FF8000 FW rev:# %04X",
-			panel_ic_paired ? "Paired" : "#FFDD00 Error#",
+		s_printf(txt_buf + strlen(txt_buf), " - %s)\n#FF8000 FTB版本:# %04X\n#FF8000 固件修订号:# %04X",
+			panel_ic_paired ? "已配对" : "#FFDD00 错误#",
 			touch_fw.ftb_ver,
 			byte_swap_16(touch_fw.fw_rev)); // Byte swapping makes more sense here.
 	}
@@ -982,9 +982,9 @@ static lv_res_t _create_window_fuses_info_status(lv_obj_t *btn)
 
 	// Check if patched unit.
 	if (!fuse_check_patched_rcm())
-		strcat(txt_buf, "\n\n#96FF00 This unit is exploitable#\n#96FF00 to the RCM bug!#");
+		strcat(txt_buf, "\n\n#96FF00 此设备可利用##96FF00 RCM漏洞!#");
 	else
-		strcat(txt_buf, "\n\n#FF8000 This unit is patched#\n#FF8000 to the RCM bug!#");
+		strcat(txt_buf, "\n\n#FF8000 此设备已修补##FF8000 RCM漏洞!#");
 
 	lv_label_set_text(lb_desc2, txt_buf);
 
@@ -1021,8 +1021,8 @@ static void _ipatch_process(u32 offset, u32 value)
 
 static lv_res_t _create_window_bootrom_info_status(lv_obj_t *btn)
 {
-	lv_obj_t *win = nyx_create_standard_window(SYMBOL_CHIP" Bootrom 信息");
-	lv_win_add_btn(win, NULL, SYMBOL_DOWNLOAD" 提取 Bootrom", _bootrom_dump_window_action);
+	lv_obj_t *win = nyx_create_standard_window(SYMBOL_CHIP" Bootrom信息");
+	lv_win_add_btn(win, NULL, SYMBOL_DOWNLOAD" 提取Bootrom", _bootrom_dump_window_action);
 
 	lv_obj_t *desc = lv_cont_create(win, NULL);
 	lv_obj_set_size(desc, LV_HOR_RES / 2 / 3 * 2, LV_VER_RES - (LV_DPI * 11 / 7) - 5);
@@ -1034,11 +1034,11 @@ static lv_res_t _create_window_bootrom_info_status(lv_obj_t *btn)
 
 	char *txt_buf = (char *)malloc(SZ_4K);
 	ipatches_txt = txt_buf;
-	s_printf(txt_buf, "#00DDFF Ipatches:#\n#FF8000 Address  "SYMBOL_DOT"  Val  "SYMBOL_DOT"  Instruction#\n");
+	s_printf(txt_buf, "#00DDFF Ipatches:#\n#FF8000 地址     "SYMBOL_DOT"  值   "SYMBOL_DOT"  指令#\n");
 
 	u32 res = fuse_read_ipatch(_ipatch_process);
 	if (res != 0)
-		s_printf(txt_buf + strlen(txt_buf), "#FFDD00 Failed to read ipatches. Error: %d#", res);
+		s_printf(txt_buf + strlen(txt_buf), "#FFDD00 无法读取ipatches. 错误: %d#", res);
 
 	lv_label_set_text(lb_desc, txt_buf);
 
@@ -1164,28 +1164,28 @@ static lv_res_t _create_mbox_emmc_sandisk_report(lv_obj_t * btn)
 	memcpy(fw_update_time, rpt->fw_update_time, sizeof(rpt->fw_update_time));
 
 	s_printf(txt_buf,
-		"#00DDFF Device report#\n"
+		"#00DDFF 设备报告#\n"
 		//"#FF8000 Average Erases SYS:#    %d\n"
-		"#FF8000 Average Erases SLC:#    %d\n"
-		"#FF8000 Average Erases MLC:#    %d\n"
+		"#FF8000 SLC平均擦除次数:#       %d\n"
+		"#FF8000 MLC平均擦除次数:#       %d\n"
 		//"#FF8000 Read Reclaims SYS:#     %d\n"
-		"#FF8000 Read Reclaims SLC:#     %d\n"
-		"#FF8000 Read Reclaims MLC:#     %d\n"
-		"#FF8000 Bad Blocks Factory:#    %d\n"
-		"#FF8000 Bad Blocks SYS:#        %d\n"
-		"#FF8000 Bad Blocks SLC:#        %d\n"
-		"#FF8000 Bad Blocks MLC:#        %d\n"
-		"#FF8000 FW Updates:#            %d\n"
-		"#FF8000 FW Buildtime:#          %s %s\n"
-		"#FF8000 Total Writes:#          %d MB\n"
+		"#FF8000 SLC读取回收次数:#       %d\n"
+		"#FF8000 MLC读取回收次数:#       %d\n"
+		"#FF8000 出厂坏块数:#            %d\n"
+		"#FF8000 系统坏块数:#            %d\n"
+		"#FF8000 SLC坏块数:#            %d\n"
+		"#FF8000 MLC坏块数:#            %d\n"
+		"#FF8000 固件更新次数:#          %d\n"
+		"#FF8000 固件构建时间:#          %s %s\n"
+		"#FF8000 总写入量:#              %d MB\n"
 		//"#FF8000 Voltage Drops:#         %d\n"
 		//"#FF8000 Voltage Droops:#        %d\n"
 		//"#FF8000 VD Failed Recovers:#    %d\n"
 		//"#FF8000 VD Recover Operations:# %d\n"
-		"#FF8000 Total Writes SLC:#      %d MB\n"
-		"#FF8000 Total Writes MLC:#      %d MB\n"
-		"#FF8000 BigFile limit status:#  %d\n"
-		"#FF8000 Average Erases Hybrid:# %d",
+		"#FF8000 SLC总写入量:#           %d MB\n"
+		"#FF8000 MLC总写入量:#           %d MB\n"
+		"#FF8000 大文件超限次数:#        %d\n"
+		"#FF8000 混合类型平均擦除次数:#  %d",
 
 		//rpt->avg_erase_cycles_sys,
 		rpt->avg_erase_cycles_slc,
@@ -1217,29 +1217,29 @@ static lv_res_t _create_mbox_emmc_sandisk_report(lv_obj_t * btn)
 	if (advanced_report)
 	{
 		s_printf(txt_buf2,
-			"#00DDFF Advanced Health Status#\n"
-			"#FF8000 Power ups:#             %d\n"
+			"#00DDFF 高级健康状态#\n"
+			"#FF8000 电源启动次数:#          %d\n"
 			//"#FF8000 Maximum Erases SYS:#    %d\n"
-			"#FF8000 Maximum Erases SLC:#    %d\n"
-			"#FF8000 Maximum Erases MLC:#    %d\n"
+			"#FF8000 SLC最大擦除次数:#       %d\n"
+			"#FF8000 MLC最大擦除次数:#       %d\n"
 			//"#FF8000 Minimum Erases SYS:#    %d\n"
-			"#FF8000 Minimum Erases SLC:#    %d\n"
-			"#FF8000 Minimum Erases MLC:#    %d\n"
-			"#FF8000 Maximum Erases EUDA:#   %d\n"
-			"#FF8000 Minimum Erases EUDA:#   %d\n"
-			"#FF8000 Average Erases EUDA:#   %d\n"
-			"#FF8000 Read Reclaims EUDA:#    %d\n"
-			"#FF8000 Bad Blocks EUDA:#       %d\n"
+			"#FF8000 SLC最小擦除次数:#       %d\n"
+			"#FF8000 MLC最小擦除次数:#       %d\n"
+			"#FF8000 EUDA最大擦除次数:#      %d\n"
+			"#FF8000 EUDA最小擦除次数:#      %d\n"
+			"#FF8000 EUDA平均擦除次数:#      %d\n"
+			"#FF8000 EUDA读取回收次数:#      %d\n"
+			"#FF8000 EUDA坏块数:#            %d\n"
 			//"#FF8000 Pre EOL State EUDA:#    %d\n"
 			//"#FF8000 Pre EOL State SYS:#     %d\n"
 			//"#FF8000 Pre EOL State MLC:#     %d\n"
-			"#FF8000 Uncorrectable ECC:#     %d\n"
-			"#FF8000 Temperature Now:#       %d oC\n"
+			"#FF8000 无法修正的ECC错误数:#   %d\n"
+			"#FF8000 当前温度:#              %d oC\n"
 			//"#FF8000 Temperature Min:#       %d oC\n"
-			"#FF8000 Temperature Max:#       %d oC\n"
-			"#FF8000 Health Level EUDA:#     %d%%\n"
+			"#FF8000 最高温度:#              %d oC\n"
+			"#FF8000 EUDA健康等级:#          %d%%\n"
 			//"#FF8000 Health Level SYS:#      %d%%\n"
-			"#FF8000 Health Level MLC:#      %d%%",
+			"#FF8000 MLC健康等级:#           %d%%",
 
 			rpt->advanced.power_inits,
 			//rpt->advanced.max_erase_cycles_sys,
@@ -1265,7 +1265,7 @@ static lv_res_t _create_mbox_emmc_sandisk_report(lv_obj_t * btn)
 			rpt->advanced.health_pct_mlc ? 101 - rpt->advanced.health_pct_mlc : 0);
 	}
 	else
-		strcpy(txt_buf2, "#00DDFF Advanced Health Status#\n#FFDD00 Empty!#");
+		strcpy(txt_buf2, "#00DDFF 高级健康状态#\n#FFDD00 为空!#");
 
 	lv_label_set_text(lb_desc, txt_buf);
 	lv_label_set_text(lb_desc2, txt_buf2);
@@ -1363,7 +1363,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 		u32 sector_num = 0x8000;       // 16MB chunks.
 		u32 data_remaining = 0x200000; // 1GB.
 
-		s_printf(txt_buf + strlen(txt_buf), "#C7EA46 %d/3# - Sector Offset #C7EA46 %08X#:\n", iter_curr + 1, sector);
+		s_printf(txt_buf + strlen(txt_buf), "#C7EA46 %d/3# - 扇区偏移 #C7EA46 %08X#:\n", iter_curr + 1, sector);
 
 		u32 render_min_ms = 66;
 		u32 render_timer  = get_tmr_ms() + render_min_ms;
@@ -1398,7 +1398,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 
 		u32 rate_1k = ((u64)1024 * 1000 * 1000 * 1000) / timer;
 		s_printf(txt_buf + strlen(txt_buf),
-			" Sequential 16MiB - Rate: #C7EA46 %3d.%02d MiB/s#\n",
+			" 顺序 16MiB - 速率: #C7EA46 %3d.%02d MiB/s#\n",
 			rate_1k / 1000, (rate_1k % 1000) / 10);
 		lv_label_set_text(lbl_status, txt_buf);
 		lv_obj_align(lbl_status, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -1445,7 +1445,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 		rate_1k = ((u64)512 * 1000 * 1000 * 1000) / timer;
 		u32 iops_1k = ((u64)512 * 1024 * 1000 * 1000 * 1000) / (4096 / 1024) / timer / 1000;
 		s_printf(txt_buf + strlen(txt_buf),
-			" Sequential  4KiB - Rate: #C7EA46 %3d.%02d MiB/s#, IOPS: #C7EA46 %4d#\n",
+			" 顺序  4KiB - 速率: #C7EA46 %3d.%02d MiB/s#, IOPS: #C7EA46 %4d#\n",
 			rate_1k / 1000, (rate_1k % 1000) / 10, iops_1k);
 		lv_label_set_text(lbl_status, txt_buf);
 		lv_obj_align(lbl_status, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -1509,7 +1509,7 @@ static lv_res_t _create_mbox_benchmark(bool sd_bench)
 		rate_1k = ((u64)512 * 1000 * 1000 * 1000) / timer;
 		iops_1k = ((u64)512 * 1024 * 1000 * 1000 * 1000) / (4096 / 1024) / timer / 1000;
 		s_printf(txt_buf + strlen(txt_buf),
-			" Random      4KiB - Rate: #C7EA46 %3d.%02d MiB/s#, IOPS: #C7EA46 %4d#\n",
+			" 随机  4KiB - 速率: #C7EA46 %3d.%02d MiB/s#, IOPS: #C7EA46 %4d#\n",
 			rate_1k / 1000, (rate_1k % 1000) / 10, iops_1k);
 		if (iter_curr == iters - 1)
 			txt_buf[strlen(txt_buf) - 1] = 0; // Cut off last line change.
@@ -1610,20 +1610,20 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 	switch (emmc_storage.cid.manfid)
 	{
 	case 0x11:
-		strcat(txt_buf, "Toshiba ");
+		strcat(txt_buf, "东芝 ");
 		break;
 	case 0x15:
-		strcat(txt_buf, "Samsung ");
+		strcat(txt_buf, "三星 ");
 		break;
 	case 0x45: // Unofficial.
-		strcat(txt_buf, "SanDisk ");
+		strcat(txt_buf, "闪迪 ");
 		lv_win_add_btn(win, NULL, SYMBOL_FILE_ALT" 设备报告", _create_mbox_emmc_sandisk_report);
 		break;
 	case 0x90:
-		strcat(txt_buf, "SK Hynix ");
+		strcat(txt_buf, "SK海力士 ");
 		break;
 	default:
-		strcat(txt_buf, "Unknown ");
+		strcat(txt_buf, "未知 ");
 		break;
 	}
 
@@ -1664,7 +1664,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 	strcpy(life_b_txt, "-");
 
 	// Normalize cells life.
-	if (life_a) // SK Hynix is 0 (undefined).
+	if (life_a) // SK海力士 is 0 (undefined).
 	{
 		life_a--;
 		life_a = (10 - life_a) * 10;
@@ -1681,16 +1681,16 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 	switch (emmc_storage.ext_csd.pre_eol_info)
 	{
 	case 1:
-		rsvd_blocks = "Normal (< 80%)";
+		rsvd_blocks = "正常 (< 80%)";
 		break;
 	case 2:
-		rsvd_blocks = "Warning (> 80%)";
+		rsvd_blocks = "警告 (> 80%)";
 		break;
 	case 3:
-		rsvd_blocks = "Critical (> 90%)";
+		rsvd_blocks = "临界 (> 90%)";
 		break;
 	default:
-		rsvd_blocks = "#FF8000 Unknown#";
+		rsvd_blocks = "#FF8000 未知#";
 		break;
 	}
 
@@ -1705,20 +1705,20 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 
 	lv_label_set_static_text(lb_desc,
 		"#00DDFF CID:#\n"
-		"Vendor ID:\n"
-		"Model:\n"
-		"Prod Rev:\n"
-		"S/N:\n"
-		"Month/Year:\n\n"
-		"#00DDFF Ext CSD:#\n"
-		"Cmd Classes:\n"
-		"Max Rate:\n"
-		"Current Rate:\n"
-		"Type Support:\n\n"
-		"Write Cache:\n"
-		"Enhanced Area:\n"
-		"Estimated Life:\n"
-		"Reserved Used:"
+		"供应商ID:\n"
+		"型号:\n"
+		"产品版本:\n"
+		"序列号:\n"
+		"月份/年份:\n\n"
+		"#00DDFF 扩展CSD:#\n"
+		"命令类:\n"
+		"最大速率:\n"
+		"当前速率:\n"
+		"支持类型:\n\n"
+		"写缓存:\n"
+		"增强区域:\n"
+		"预计寿命:\n"
+		"已用保留空间:"
 	);
 	lv_obj_set_width(lb_desc, lv_obj_get_width(desc));
 
@@ -1740,12 +1740,12 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 
 	u32 boot_size = emmc_storage.ext_csd.boot_mult << 17;
 	u32 rpmb_size = emmc_storage.ext_csd.rpmb_mult << 17;
-	strcpy(txt_buf, "#00DDFF eMMC Physical Partitions:#\n");
-	s_printf(txt_buf + strlen(txt_buf), "1: #96FF00 BOOT0# Size: %6d KiB (Sect: 0x%08X)\n", boot_size / 1024, boot_size / EMMC_BLOCKSIZE);
-	s_printf(txt_buf + strlen(txt_buf), "2: #96FF00 BOOT1# Size: %6d KiB (Sect: 0x%08X)\n", boot_size / 1024, boot_size / EMMC_BLOCKSIZE);
-	s_printf(txt_buf + strlen(txt_buf), "3: #96FF00 RPMB#  Size: %6d KiB (Sect: 0x%08X)\n", rpmb_size / 1024, rpmb_size / EMMC_BLOCKSIZE);
-	s_printf(txt_buf + strlen(txt_buf), "0: #96FF00 GPP#   Size: %6d MiB (Sect: 0x%08X)\n", emmc_storage.sec_cnt >> SECTORS_TO_MIB_COEFF, emmc_storage.sec_cnt);
-	strcat(txt_buf, "\n#00DDFF GPP (eMMC USER) Partition Table:#\n");
+	strcpy(txt_buf, "#00DDFF eMMC物理分区:#\n");
+	s_printf(txt_buf + strlen(txt_buf), "1: #96FF00 BOOT0# 大小: %6d KiB (扇区: 0x%08X)\n", boot_size / 1024, boot_size / EMMC_BLOCKSIZE);
+	s_printf(txt_buf + strlen(txt_buf), "2: #96FF00 BOOT1# 大小: %6d KiB (扇区: 0x%08X)\n", boot_size / 1024, boot_size / EMMC_BLOCKSIZE);
+	s_printf(txt_buf + strlen(txt_buf), "3: #96FF00 RPMB#  大小: %6d KiB (扇区: 0x%08X)\n", rpmb_size / 1024, rpmb_size / EMMC_BLOCKSIZE);
+	s_printf(txt_buf + strlen(txt_buf), "0: #96FF00 GPP#   大小: %6d MiB (扇区: 0x%08X)\n", emmc_storage.sec_cnt >> SECTORS_TO_MIB_COEFF, emmc_storage.sec_cnt);
+	strcat(txt_buf, "\n#00DDFF GPP (eMMC用户) 分区表:#\n");
 
 	emmc_set_partition(EMMC_GPP);
 	LIST_INIT(gpt);
@@ -1756,20 +1756,20 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 	{
 		if (idx > 10)
 		{
-			strcat(txt_buf, "#FFDD00 Table does not fit on screen!#");
+			strcat(txt_buf, "#FFDD00 分区表无法完全显示在屏幕上!#");
 			break;
 		}
 
 		if (part->index < 2)
 		{
-			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#%s Size: %d MiB (Sect: 0x%X), Start: %06X\n",
+			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#%s 大小: %d MiB (Sect: 0x%X), 起始地址: %06X\n",
 				part->index, part->name, !part->name[8] ? " " : "",
 				(part->lba_end - part->lba_start + 1) >> SECTORS_TO_MIB_COEFF,
 				part->lba_end - part->lba_start + 1, part->lba_start);
 		}
 		else
 		{
-			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#\n    Size: %7d MiB (Sect: 0x%07X), Start: %07X\n",
+			s_printf(txt_buf + strlen(txt_buf), "%02d: #96FF00 %s#\n    大小: %7d MiB (Sect: 0x%07X), 起始地址: %07X\n",
 				part->index, part->name, (part->lba_end - part->lba_start + 1) >> SECTORS_TO_MIB_COEFF,
 				part->lba_end - part->lba_start + 1, part->lba_start);
 		}
@@ -1777,7 +1777,7 @@ static lv_res_t _create_window_emmc_info_status(lv_obj_t *btn)
 		idx++;
 	}
 	if (!idx)
-		strcat(txt_buf, "#FFDD00 Partition table is empty!#");
+		strcat(txt_buf, "#FFDD00 分区表为空!#");
 
 	emmc_gpt_free(&gpt);
 
@@ -1801,15 +1801,15 @@ out_error:
 		lv_mbox_set_recolor_text(mbox, true);
 
 		s_printf(txt_buf,
-			"#FF8000 eMMC Issues Check#\n\n"
-			"#FFDD00 Your eMMC is initialized in slower mode,#\n"
-			"#FFDD00 or init/read/write errors occurred!#\n"
-			"#FFDD00 This might mean hardware issues!#\n\n"
-			"#00DDFF Bus Speed:# %d MB/s\n\n"
-			"#00DDFF SDMMC4 Errors:#\n"
-			"Init fails: %d\n"
-			"Read/Write fails: %d\n"
-			"Read/Write errors: %d",
+			"#FF8000 eMMC问题检查#\n\n"
+			"#FFDD00 您的eMMC初始化为较慢模式,#\n"
+			"#FFDD00 或发生初始化/读取/写入错误!#\n"
+			"#FFDD00 这可能意味着硬件问题!#\n\n"
+			"#00DDFF 总线速度:# %d MB/s\n\n"
+			"#00DDFF SDMMC4错误:#\n"
+			"初始化失败数: %d\n"
+			"读/写失败数: %d\n"
+			"读/写错误数: %d",
 			emmc_storage.csd.busspeed,
 			emmc_errors[EMMC_ERROR_INIT_FAIL],
 			emmc_errors[EMMC_ERROR_RW_FAIL],
@@ -1855,16 +1855,16 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	}
 
 	lv_label_set_text(lb_desc,
-		"#00DDFF Card IDentification:#\n"
-		"Vendor ID:\n"
-		"Model:\n"
+		"#00DDFF 卡ID:#\n"
+		"供应商ID:\n"
+		"型号:\n"
 		"OEM ID:\n"
-		"HW rev:\n"
-		"FW rev:\n"
-		"S/N:\n"
-		"Month/Year:\n\n"
-		"Max Power:\n"
-		"Bootloader bus:"
+		"硬件版本:\n"
+		"固件版本:\n"
+		"序列号:\n"
+		"生产月/年:\n\n"
+		"最大功率:\n"
+		"引导程序总线:"
 	);
 
 	lv_obj_t *val = lv_cont_create(win, NULL);
@@ -1880,52 +1880,52 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	switch (sd_storage.cid.manfid)
 	{
 	case 0x00:
-		strcat(txt_buf, "Fake ");
+		strcat(txt_buf, "仿冒 ");
 		break;
 	case 0x01:
-		strcat(txt_buf, "Panasonic ");
+		strcat(txt_buf, "松下 ");
 		break;
 	case 0x02:
-		strcat(txt_buf, "Toshiba ");
+		strcat(txt_buf, "东芝 ");
 		break;
 	case 0x03:
 		if (!memcmp(&sd_storage.cid.oemid, "DW", 2))
-			strcat(txt_buf, "Western Digital "); // WD.
+			strcat(txt_buf, "西数 "); // WD.
 		else
-			strcat(txt_buf, "SanDisk ");
+			strcat(txt_buf, "闪迪 ");
 		break;
 	case 0x06:
-		strcat(txt_buf, "Ritek ");
+		strcat(txt_buf, "铼德 ");
 		break;
 	case 0x09:
 		strcat(txt_buf, "ATP ");
 		break;
 	case 0x13:
-		strcat(txt_buf, "Kingmax ");
+		strcat(txt_buf, "胜创 ");
 		break;
 	case 0x19:
-		strcat(txt_buf, "Dynacard ");
+		strcat(txt_buf, "新东亚 ");
 		break;
 	case 0x1A:
-		strcat(txt_buf, "Power Quotient ");
+		strcat(txt_buf, "劲永 ");
 		break;
 	case 0x1B:
-		strcat(txt_buf, "Samsung ");
+		strcat(txt_buf, "三星 ");
 		break;
 	case 0x1D:
-		strcat(txt_buf, "AData ");
+		strcat(txt_buf, "威刚 ");
 		break;
 	case 0x27:
-		strcat(txt_buf, "Phison ");
+		strcat(txt_buf, "群联 ");
 		break;
 	case 0x28:
-		strcat(txt_buf, "Barun Electronics ");
+		strcat(txt_buf, "巴伦电子 ");
 		break;
 	case 0x31:
-		strcat(txt_buf, "Silicon Power ");
+		strcat(txt_buf, "广颖电通 ");
 		break;
 	case 0x41:
-		strcat(txt_buf, "Kingston ");
+		strcat(txt_buf, "金士顿 ");
 		break;
 	case 0x51:
 		strcat(txt_buf, "STEC ");
@@ -1959,18 +1959,18 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 		break;
 	case 0x9C:
 		if (!memcmp(&sd_storage.cid.oemid, "OS", 2))
-			strcat(txt_buf, "Sony "); // SO.
+			strcat(txt_buf, "索尼 "); // SO.
 		else
-			strcat(txt_buf, "Barun Electronics "); // BE.
+			strcat(txt_buf, "巴伦电子 "); // BE.
 		break;
 	case 0x9F:
 		strcat(txt_buf, "Taishin ");
 		break;
 	case 0xAD:
-		strcat(txt_buf, "Longsys ");
+		strcat(txt_buf, "江波龙 ");
 		break;
 	default:
-		strcat(txt_buf, "Unknown ");
+		strcat(txt_buf, "未知 ");
 		break;
 	}
 
@@ -2000,7 +2000,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 		break;
 	case 0:
 	default:
-		strcat(txt_buf, "Undefined");
+		strcat(txt_buf, "未定义");
 		break;
 	}
 
@@ -2015,16 +2015,16 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_t * lb_desc2 = lv_label_create(desc2, lb_desc);
 
 	lv_label_set_static_text(lb_desc2,
-		"#00DDFF Card-Specific Data#\n"
-		"Cmd Classes:\n"
-		"Capacity:\n"
-		"Capacity (LBA):\n"
-		"Bus Width:\n"
-		"Current Rate:\n"
-		"Speed Class:\n"
-		"UHS Classes:\n"
-		"Max Bus Speed:\n\n"
-		"Write Protect:"
+		"#00DDFF 卡特定数据#\n"
+		"命令类别:\n"
+		"容量:\n"
+		"容量(LBA):\n"
+		"总线宽度:\n"
+		"当前速率:\n"
+		"速度等级:\n"
+		"UHS等级:\n"
+		"最大总线速度:\n\n"
+		"写保护:"
 	);
 	lv_obj_set_width(lb_desc2, lv_obj_get_width(desc2));
 	lv_obj_align(desc2, val, LV_ALIGN_OUT_RIGHT_MID, LV_DPI / 2, 0);
@@ -2038,14 +2038,14 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	switch (sd_storage.csd.write_protect)
 	{
 	case 1:
-		wp_info = "Temporary";
+		wp_info = "临时";
 		break;
 	case 2:
 	case 3:
-		wp_info = "Permanent";
+		wp_info = "永久";
 		break;
 	default:
-		wp_info = "None";
+		wp_info = "无";
 		break;
 	}
 
@@ -2099,7 +2099,7 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_set_size(desc3, LV_HOR_RES / 2 / 2 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 
 	lv_obj_t * lb_desc3 = lv_label_create(desc3, lb_desc);
-	lv_label_set_text(lb_desc3, "#D4FF00 正在获取 FAT 卷信息...#");
+	lv_label_set_text(lb_desc3, "#D4FF00 正在获取FAT卷信息...#");
 	lv_obj_set_width(lb_desc3, lv_obj_get_width(desc3));
 
 	lv_obj_align(desc3, desc, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
@@ -2109,10 +2109,10 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	f_getfree("", &sd_fs.free_clst, NULL);
 
 	lv_label_set_text(lb_desc3,
-		"#00DDFF Found FAT volume:#\n"
-		"Filesystem:\n"
-		"Cluster:\n"
-		"Size free/total:"
+		"#00DDFF 发现FAT卷标:#\n"
+		"文件系统:\n"
+		"簇大小:\n"
+		"剩余/总大小:"
 	);
 	lv_obj_set_size(desc3, LV_HOR_RES / 2 / 5 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 	lv_obj_set_width(lb_desc3, lv_obj_get_width(desc3));
@@ -2139,14 +2139,14 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	lv_obj_set_size(desc4, LV_HOR_RES / 2 / 2 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 
 	lv_obj_t * lb_desc4 = lv_label_create(desc4, lb_desc);
-	lv_label_set_text(lb_desc4, "#D4FF00 Acquiring FAT volume info...#");
+	lv_label_set_text(lb_desc4, "#D4FF00 正在获取FAT卷标信息...#");
 	lv_obj_set_width(lb_desc4, lv_obj_get_width(desc4));
 
 	lv_label_set_text(lb_desc4,
-		"#00DDFF SDMMC1 Errors:#\n"
-		"Init fails:\n"
-		"Read/Write fails:\n"
-		"Read/Write errors:"
+		"#00DDFF SDMMC1错误:#\n"
+		"初始化失败:\n"
+		"读/写失败:\n"
+		"读/写错误:"
 	);
 	lv_obj_set_size(desc4, LV_HOR_RES / 2 / 5 * 2, LV_VER_RES - (LV_DPI * 11 / 8) * 4);
 	lv_obj_set_width(lb_desc4, lv_obj_get_width(desc4));
@@ -2190,20 +2190,20 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	lv_label_set_recolor(lb_desc, true);
 
 	lv_label_set_static_text(lb_desc,
-		"#00DDFF Fuel Gauge IC Info:#\n"
-		"Capacity now:\n"
-		"Capacity full:\n"
-		"Capacity (design):\n"
-		"Current now:\n"
-		"Current average:\n"
-		"Voltage now:\n"
-		"Voltage open-circuit:\n"
-		"Min voltage reached:\n"
-		"Max voltage reached:\n"
-		"Empty voltage:\n"
-		"Battery temp:\n\n"
-		"#00DDFF PMIC IC Info:#\n"
-		"Main PMIC:\n\n"
+		"#00DDFF 电量计芯片信息:#\n"
+		"当前容量:\n"
+		"满充容量:\n"
+		"设计容量:\n"
+		"当前电流:\n"
+		"平均电流:\n"
+		"当前电压:\n"
+		"开路电压:\n"
+		"最低电压:\n"
+		"最高电压:\n"
+		"空载电压:\n"
+		"电池温度:\n\n"
+		"#00DDFF PMIC芯片信息:#\n"
+		"主PMIC:\n\n"
 		"CPU/GPU PMIC:\n"
 	);
 	lv_obj_set_width(lb_desc, lv_obj_get_width(desc));
@@ -2228,7 +2228,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	max17050_get_property(MAX17050_DesignCap, &value);
 	bool design_cap_init = value == 1000;
 	s_printf(txt_buf + strlen(txt_buf), "%s%d mAh%s\n",
-		design_cap_init ? "#FF8000 " : "", value,  design_cap_init ? " - Init "SYMBOL_WARNING"#" : "");
+		design_cap_init ? "#FF8000 " : "", value,  design_cap_init ? " - 初始化 "SYMBOL_WARNING"#" : "");
 
 	max17050_get_property(MAX17050_Current, &value);
 	s_printf(txt_buf + strlen(txt_buf), "%d mA\n", value / 1000);
@@ -2265,7 +2265,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	else if (value == 0x53)
 		s_printf(txt_buf + strlen(txt_buf), "max77620 v%d\nMariko OTP\n", main_pmic_version);
 	else
-		s_printf(txt_buf + strlen(txt_buf), "max77620 v%d\n#FF8000 Unknown OTP# (%02X)\n", main_pmic_version, value);
+		s_printf(txt_buf + strlen(txt_buf), "max77620 v%d\n#FF8000 未知 OTP# (%02X)\n", main_pmic_version, value);
 
 	// CPU/GPU/DRAM Pmic IC info.
 	u32 cpu_gpu_pmic_type = h_cfg.t210b01 ? (FUSE(FUSE_RESERVED_ODM28_B01) & 1) + 1 : 0;
@@ -2296,18 +2296,18 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	lv_obj_t * lb_desc2 = lv_label_create(desc2, lb_desc);
 
 	lv_label_set_static_text(lb_desc2,
-		"#00DDFF Battery Charger IC Info:#\n"
-		"Input voltage limit:\n"
-		"Input current limit:\n"
-		"Min voltage limit:\n"
-		"Fast charge current limit:\n"
-		"Charge voltage limit:\n"
-		"Charge status:\n"
-		"Temperature status:\n\n"
-		"#00DDFF USB-PD IC Info:#\n"
-		"Connection status:\n"
-		"Input Wattage Limit:\n"
-		"USB-PD Profiles:"
+		"#00DDFF 电池充电芯片信息:#\n"
+		"输入电压限制:\n"
+		"输入电流限制:\n"
+		"最低电压限制:\n"
+		"快充电流限制:\n"
+		"充电电压限制:\n"
+		"充电状态:\n"
+		"温度状态:\n\n"
+		"#00DDFF USB-PD芯片信息:#\n"
+		"连接状态:\n"
+		"输入功率限制:\n"
+		"USB-PD配置文件:"
 	);
 	lv_obj_set_width(lb_desc2, lv_obj_get_width(desc2));
 	lv_obj_align(desc2, val, LV_ALIGN_OUT_RIGHT_MID, LV_DPI / 2, 0);
@@ -2338,19 +2338,19 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	switch (value)
 	{
 	case 0:
-		strcat(txt_buf, "Not charging\n");
+		strcat(txt_buf, "未充电\n");
 		break;
 	case 1:
-		strcat(txt_buf, "Pre-charging\n");
+		strcat(txt_buf, "预充电\n");
 		break;
 	case 2:
-		strcat(txt_buf, "Fast charging\n");
+		strcat(txt_buf, "快速充电\n");
 		break;
 	case 3:
-		strcat(txt_buf, "Charge terminated\n");
+		strcat(txt_buf, "充电完成\n");
 		break;
 	default:
-		s_printf(txt_buf + strlen(txt_buf), "Unknown (%d)\n", value);
+		s_printf(txt_buf + strlen(txt_buf), "未知 (%d)\n", value);
 		break;
 	}
 
@@ -2358,22 +2358,22 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	switch (value)
 	{
 	case 0:
-		strcat(txt_buf, "Normal");
+		strcat(txt_buf, "正常");
 		break;
 	case 2:
-		strcat(txt_buf, "Warm");
+		strcat(txt_buf, "温暖");
 		break;
 	case 3:
-		strcat(txt_buf, "Cool");
+		strcat(txt_buf, "凉爽");
 		break;
 	case 5:
-		strcat(txt_buf, "#FF8000 Cold#");
+		strcat(txt_buf, "#FF8000 冰冷#");
 		break;
 	case 6:
-		strcat(txt_buf, "#FF8000 Hot#");
+		strcat(txt_buf, "#FF8000 炎热#");
 		break;
 	default:
-		s_printf(txt_buf + strlen(txt_buf), "Unknown (%d)", value);
+		s_printf(txt_buf + strlen(txt_buf), "未知 (%d)", value);
 		break;
 	}
 
@@ -2383,7 +2383,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	usb_pd_objects_t usb_pd;
 	bm92t36_get_sink_info(&inserted, &usb_pd);
 	strcat(txt_buf, "\n\n\n");
-	strcat(txt_buf, inserted ? "Connected" : "Disconnected");
+	strcat(txt_buf, inserted ? "已连接" : "已断开");
 
 	// Select 5V is no PD contract.
 	wattage = iinlim * (usb_pd.pdo_no ? usb_pd.selected_pdo.voltage : 5);
@@ -2391,7 +2391,7 @@ static lv_res_t _create_window_battery_status(lv_obj_t *btn)
 	s_printf(txt_buf + strlen(txt_buf), "\n%d.%d W", wattage / 1000, (wattage % 1000) / 100);
 
 	if (!usb_pd.pdo_no)
-		strcat(txt_buf, "\nNon PD");
+		strcat(txt_buf, "\n非PD");
 
 	// Limit to 5 profiles so it can fit.
 	usb_pd.pdo_no = MIN(usb_pd.pdo_no, 5);
@@ -2608,7 +2608,7 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt5 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt5, true);
 	lv_label_set_static_text(label_txt5,
-		"查看有关 eMMC 或 microSD 及其分区列表的信息.\n"
+		"查看有关eMMC或microSD及其分区列表的信息.\n"
 		"此外, 您可以对读取速度进行基准测试.");
 	lv_obj_set_style(label_txt5, &hint_small_style);
 	lv_obj_align(label_txt5, btn5, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);

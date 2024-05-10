@@ -922,7 +922,7 @@ static lv_res_t _action_check_flash_linux(lv_obj_t *btn)
 			// If it exists, unaligned size for current part is not permitted.
 			if (!f_stat(path, NULL)) // NULL: Don't override current part fs info.
 			{
-				lv_label_set_text(lbl_status, "#FFDD00 错误:# 镜像没有4 MiB对齐!");
+				lv_label_set_text(lbl_status, "#FFDD00 错误:# 镜像没有4MiB对齐!");
 				goto error;
 			}
 
@@ -1039,7 +1039,7 @@ static lv_res_t _action_flash_android_data(lv_obj_t * btns, const char * txt)
 	// Validate GPT header.
 	if (memcmp(&gpt->header.signature, "EFI PART", 8) || gpt->header.num_part_ents > 128)
 	{
-		lv_label_set_text(lbl_status, "#FFDD00 错误:# 未找到 Android GPT分区!");
+		lv_label_set_text(lbl_status, "#FFDD00 错误:# 未找到Android GPT分区!");
 		goto error;
 	}
 
@@ -1247,7 +1247,7 @@ error:
 	if (boot_recovery)
 	{
 		// If a Recovery partition was found, ask user if rebooting into it is wanted.
-		strcat(txt_buf,"\n\n是否需要重启进入Recovery\n以完成 Android 安装?");
+		strcat(txt_buf,"\n\n是否需要重启进入Recovery\n以完成Android安装?");
 		lv_label_set_text(lbl_status, txt_buf);
 		lv_mbox_add_btns(mbox, mbox_btn_map2, _action_reboot_recovery);
 	}
@@ -1780,7 +1780,7 @@ static lv_res_t _create_mbox_partitioning_andr_part(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 
 	lv_obj_set_width(mbox, LV_HOR_RES / 10 * 5);
-	lv_mbox_set_text(mbox, "#FF8000 Android 分区#");
+	lv_mbox_set_text(mbox, "#FF8000 Android分区#");
 
 	lv_obj_t *lbl_status = lv_label_create(mbox, NULL);
 	lv_label_set_recolor(lbl_status, true);
@@ -2722,7 +2722,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	lv_label_set_static_text(lbl_notes,
 		"注1: 最多只能备份#C7EA46 1GB#数据. 如果超过此容量, 您将被要求在下一步手动备份.\n"
 		"注2: 调整emuMMC的大小会格式化用户分区. 可以使用存档数据管理器将它们移动到其他分区.\n"
-		"注3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写 Linux# 和 #C7EA46 刷写 Android# 将会刷入文件.\n");
+		"注3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写Linux# 和 #C7EA46 刷写Android# 将会刷入文件.\n");
 	lv_label_set_style(lbl_notes, &hint_small_style);
 	lv_obj_align(lbl_notes, lbl_and, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 5);
 
@@ -2738,7 +2738,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	btn_flash_l4t = lv_btn_create(h1, NULL);
 	lv_obj_t *label_btn2 = lv_label_create(btn_flash_l4t, NULL);
 	lv_btn_set_fit(btn_flash_l4t, true, true);
-	lv_label_set_static_text(label_btn2, SYMBOL_DOWNLOAD"  刷写 Linux");
+	lv_label_set_static_text(label_btn2, SYMBOL_DOWNLOAD"  刷写Linux");
 	lv_obj_align(btn_flash_l4t, btn1, LV_ALIGN_OUT_RIGHT_MID, LV_DPI / 3, 0);
 	lv_btn_set_action(btn_flash_l4t, LV_BTN_ACTION_CLICK, _action_check_flash_linux);
 
@@ -2754,7 +2754,7 @@ lv_res_t create_window_partition_manager(lv_obj_t *btn)
 	btn_flash_android = lv_btn_create(h1, NULL);
 	label_btn = lv_label_create(btn_flash_android, NULL);
 	lv_btn_set_fit(btn_flash_android, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  刷写 Android");
+	lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  刷写Android");
 	lv_obj_align(btn_flash_android, btn_flash_l4t, LV_ALIGN_OUT_RIGHT_MID, LV_DPI / 3, 0);
 	lv_btn_set_action(btn_flash_android, LV_BTN_ACTION_CLICK, _action_flash_android);
 

@@ -1923,8 +1923,8 @@ failed_sd_mount:
 		else
 		{
 			lv_label_set_static_text(label_error,
-				"#FFDD00 未找到包含启动项的 .ini 文件...#\n"
-				"请检查 .ini 文件是否存在于 #96FF00 bootloader/ini/#\n"
+				"#FFDD00 未找到包含启动项的.ini文件...#\n"
+				"请检查.ini文件是否存在于 #96FF00 bootloader/ini/#\n"
 				"并且文件中至少包含一个启动项.");
 		}
 
@@ -1952,7 +1952,7 @@ static void _create_tab_home(lv_theme_t *th, lv_obj_t *parent)
 	// Set tagline label.
 	lv_obj_t *label_tagline = lv_label_create(parent, NULL);
 	lv_obj_set_style(label_tagline, &hint_small_style_white);
-	lv_label_set_static_text(label_tagline, "全能引导程序，满足您的一切需求");
+	lv_label_set_static_text(label_tagline, "全能引导程序, 满足您的一切需求");
 	lv_obj_set_pos(label_tagline, 50, 82);
 
 	static lv_style_t icons;

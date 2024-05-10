@@ -169,7 +169,7 @@ static int _dump_emummc_file_part(emmc_tool_gui_t *gui, char *sd_path, sdmmc_sto
 	// Check if the USER partition or the RAW eMMC fits the sd card free space.
 	if (totalSectors > (sd_fs.free_clst * sd_fs.csize))
 	{
-		s_printf(gui->txt_buf, "\n#FFDD00 文件式 emuMMC 空间不足!#\n");
+		s_printf(gui->txt_buf, "\n#FFDD00 文件式emuMMC空间不足!#\n");
 		lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 		manual_system_maintenance(true);
 
@@ -277,7 +277,7 @@ static int _dump_emummc_file_part(emmc_tool_gui_t *gui, char *sd_path, sdmmc_sto
 		{
 			s_printf(gui->txt_buf,
 				"\n#FFDD00 从eMMC读取%d个块时出现错误,#\n"
-				"#FFDD00 LBA 为 %08X, (第%d次重试).#",
+				"#FFDD00 LBA为%08X, (第%d次重试).#",
 				num, lba_curr, ++retryCount);
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
 			manual_system_maintenance(true);

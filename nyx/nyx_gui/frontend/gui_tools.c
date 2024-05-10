@@ -189,9 +189,9 @@ static lv_res_t _create_mbox_hid(usb_ctxt_t *usbs)
 	s_printf(txt_buf, "#FF8000 HID模拟#\n\n#C7EA46 设备:# ");
 
 	if (usbs->type == USB_HID_GAMEPAD)
-		strcat(txt_buf, "Gamepad");
+		strcat(txt_buf, "手柄");
 	else
-		strcat(txt_buf, "Touchpad");
+		strcat(txt_buf, "触摸板");
 
 	lv_mbox_set_text(mbox, txt_buf);
 	free(txt_buf);
@@ -727,7 +727,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	// Create RAW GPP button.
 	lv_obj_t *btn_gpp = lv_btn_create(h1, btn1);
 	label_btn = lv_label_create(btn_gpp, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_CHIP"  eMMC 原始GPP");
+	lv_label_set_static_text(label_btn, SYMBOL_CHIP"  eMMC原始GPP");
 	lv_obj_align(btn_gpp, label_txt2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn_gpp, LV_BTN_ACTION_CLICK, _action_ums_emmc_gpp);
 
@@ -748,7 +748,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	// Create emuMMC RAW GPP button.
 	lv_obj_t *btn_emu_gpp = lv_btn_create(h1, btn1);
 	label_btn = lv_label_create(btn_emu_gpp, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  emu 原始GPP");
+	lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  emu原始GPP");
 	lv_obj_align(btn_emu_gpp, btn_gpp, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn_emu_gpp, LV_BTN_ACTION_CLICK, _action_ums_emuemmc_gpp);
 
@@ -769,7 +769,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"允许你挂载 eMMC或emuMMC.\n"
+		"允许你挂载eMMC或emuMMC.\n"
 		"#C7EA46 默认访问权限为# #FF8000 只读.#");
 	lv_obj_set_style(label_txt2, &hint_small_style);
 	lv_obj_align(label_txt2, btn_emu_gpp, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
@@ -814,7 +814,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_obj_t *btn3 = lv_btn_create(h2, NULL);
 	label_btn = lv_label_create(btn3, NULL);
 	lv_btn_set_fit(btn3, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_CIRCUIT"  Gamepad");
+	lv_label_set_static_text(label_btn, SYMBOL_CIRCUIT"  手柄");
 	lv_obj_align(btn3, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn3, LV_BTN_ACTION_CLICK, _action_hid_jc);
 
@@ -822,7 +822,7 @@ static lv_res_t _create_window_usb_tools(lv_obj_t *parent)
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
 		"插入Joy-Con手柄并将其变成\n"
-		"PC或者手机的gamepad设备.\n"
+		"PC或者手机的手柄设备.\n"
 		"#C7EA46 需要两个Joy-Con都能正常工作.#");
 
 	lv_obj_set_style(label_txt4, &hint_small_style);
@@ -977,7 +977,7 @@ static lv_res_t _create_window_unset_abit_tool(lv_obj_t *btn)
 		if (!total[0] && !total[1])
 			s_printf(txt_buf, "#96FF00 完成! 无需更改.#");
 		else
-			s_printf(txt_buf, "#96FF00 完成! 归档位修复:# #FF8000 %d 未设置 and %d 已设置!#", total[1], total[0]);
+			s_printf(txt_buf, "#96FF00 完成! 归档位修复:# #FF8000 %d 未设置且 %d 已设置!#", total[1], total[0]);
 
 		// Check errors.
 		if (total[2] || total[3])
@@ -1012,7 +1012,7 @@ static lv_res_t _create_mbox_fix_touchscreen(lv_obj_t *btn)
 	lv_mbox_set_recolor_text(mbox, true);
 
 	char *txt_buf = malloc(SZ_16K);
-	strcpy(txt_buf, "#FF8000 请不要触摸屏幕!#\n\n调整过程将在 ");
+	strcpy(txt_buf, "#FF8000 请不要触摸屏幕!#\n\n调整过程将在");
 	u32 text_idx = strlen(txt_buf);
 	lv_mbox_set_text(mbox, txt_buf);
 
@@ -1055,48 +1055,48 @@ static lv_res_t _create_mbox_fix_touchscreen(lv_obj_t *btn)
 	{
 		touch_sense_enable();
 
-		s_printf(txt_buf, "#FFFF00 ITO Test: ");
+		s_printf(txt_buf, "#FFFF00 ITO测试: ");
 		switch (err[0])
 		{
 		case ITO_FORCE_OPEN:
-			strcat(txt_buf, "Force Open");
+			strcat(txt_buf, "力应开路");
 			break;
 		case ITO_SENSE_OPEN:
-			strcat(txt_buf, "Sense Open");
+			strcat(txt_buf, "感应开路");
 			break;
 		case ITO_FORCE_SHRT_GND:
-			strcat(txt_buf, "Force Short to GND");
+			strcat(txt_buf, "力应短路到地");
 			break;
 		case ITO_SENSE_SHRT_GND:
-			strcat(txt_buf, "Sense Short to GND");
+			strcat(txt_buf, "感应短路到地");
 			break;
 		case ITO_FORCE_SHRT_VCM:
-			strcat(txt_buf, "Force Short to VDD");
+			strcat(txt_buf, "力应短路到VDD");
 			break;
 		case ITO_SENSE_SHRT_VCM:
-			strcat(txt_buf, "Sense Short to VDD");
+			strcat(txt_buf, "感应短路到VDD");
 			break;
 		case ITO_FORCE_SHRT_FORCE:
-			strcat(txt_buf, "Force Short to Force");
+			strcat(txt_buf, "力应短路到力应");
 			break;
 		case ITO_SENSE_SHRT_SENSE:
-			strcat(txt_buf, "Sense Short to Sense");
+			strcat(txt_buf, "感应短路到感应");
 			break;
 		case ITO_F2E_SENSE:
-			strcat(txt_buf, "Force Short to Sense");
+			strcat(txt_buf, "力应短路到感应");
 			break;
 		case ITO_FPC_FORCE_OPEN:
-			strcat(txt_buf, "FPC Force Open");
+			strcat(txt_buf, "FPC力应开路");
 			break;
 		case ITO_FPC_SENSE_OPEN:
-			strcat(txt_buf, "FPC Sense Open");
+			strcat(txt_buf, "FPC感应开路");
 			break;
 		default:
-			strcat(txt_buf, "Unknown");
+			strcat(txt_buf, "未知");
 			break;
 
 		}
-		s_printf(txt_buf + strlen(txt_buf), " (%d), Chn: %d#\n\n", err[0], err[1]);
+		s_printf(txt_buf + strlen(txt_buf), " (%d), 通道: %d#\n\n", err[0], err[1]);
 		strcat(txt_buf, "#FFFF00 触摸屏校准失败!");
 		lv_mbox_set_text(mbox, txt_buf);
 		goto out2;
@@ -1173,7 +1173,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 
 	const pkg1_id_t *pkg1_id = pkg1_identify(pkg1 + pk1_offset, build_date);
 
-	s_printf(txt_buf, "#00DDFF 找到 pkg1 ('%s')#\n\n", build_date);
+	s_printf(txt_buf, "#00DDFF 找到pkg1('%s')#\n\n", build_date);
 	free(build_date);
 	lv_label_set_text(lb_desc, txt_buf);
 	manual_system_maintenance(true);
@@ -1185,13 +1185,13 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 	// Exit if unknown.
 	if (!pkg1_id)
 	{
-		strcat(txt_buf, "#FFDD00 未知 pkg1 版本!#");
+		strcat(txt_buf, "#FFDD00 未知pkg1版本!#");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 
 		if (!res)
 		{
-			strcat(txt_buf, "\n加密的 pkg1 提取到了 pkg1_enc.bin");
+			strcat(txt_buf, "\n加密的pkg1提取到了pkg1_enc.bin");
 			lv_label_set_text(lb_desc, txt_buf);
 			manual_system_maintenance(true);
 		}
@@ -1218,9 +1218,9 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 	{
 		if (!pkg1_decrypt(pkg1_id, pkg1))
 		{
-			strcat(txt_buf, "#FFDD00 Pkg1 解密失败!#\n");
+			strcat(txt_buf, "#FFDD00 Pkg1解密失败!#\n");
 			if (h_cfg.t210b01)
-				strcat(txt_buf, "#FFDD00 BEK 丢失?#\n");
+				strcat(txt_buf, "#FFDD00 BEK丢失?#\n");
 			lv_label_set_text(lb_desc, txt_buf);
 			goto out_free;
 		}
@@ -1233,11 +1233,11 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 
 		// Display info.
 		s_printf(txt_buf + strlen(txt_buf),
-			"#C7EA46 NX Bootloader 大小:  #0x%05X\n"
-			"#C7EA46 Secure monitor 地址: #0x%05X\n"
-			"#C7EA46 Secure monitor 大小: #0x%05X\n"
-			"#C7EA46 Warmboot 地址:       #0x%05X\n"
-			"#C7EA46 Warmboot 大小:       #0x%05X\n\n",
+			"#C7EA46 NX Bootloader大小:  #0x%05X\n"
+			"#C7EA46 Secure monitor地址: #0x%05X\n"
+			"#C7EA46 Secure monitor大小: #0x%05X\n"
+			"#C7EA46 Warmboot地址:       #0x%05X\n"
+			"#C7EA46 Warmboot大小:       #0x%05X\n\n",
 			hdr_pk11->ldr_size, pkg1_id->secmon_base, hdr_pk11->sm_size, pkg1_id->warmboot_base, hdr_pk11->wb_size);
 
 		lv_label_set_text(lb_desc, txt_buf);
@@ -1247,7 +1247,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 		emmcsn_path_impl(path, "/pkg1", "pkg1_decr.bin", &emmc_storage);
 		if (sd_save_to_file(pkg1, SZ_256K, path))
 			goto out_free;
-		strcat(txt_buf, "pkg1 提取到了 pkg1_decr.bin\n");
+		strcat(txt_buf, "pkg1提取到了pkg1_decr.bin\n");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 
@@ -1255,7 +1255,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 		emmcsn_path_impl(path, "/pkg1", "nxloader.bin", &emmc_storage);
 		if (sd_save_to_file(loader, hdr_pk11->ldr_size, path))
 			goto out_free;
-		strcat(txt_buf, "NX Bootloader 提取到了 nxloader.bin\n");
+		strcat(txt_buf, "NX Bootloader提取到了nxloader.bin\n");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 
@@ -1263,7 +1263,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 		emmcsn_path_impl(path, "/pkg1", "secmon.bin", &emmc_storage);
 		if (sd_save_to_file(secmon, hdr_pk11->sm_size, path))
 			goto out_free;
-		strcat(txt_buf, "Secure Monitor 提取到了 secmon.bin\n");
+		strcat(txt_buf, "Secure Monitor提取到了secmon.bin\n");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 
@@ -1282,7 +1282,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 			if (sd_save_to_file(warmboot, hdr_pk11->wb_size, path))
 				goto out_free;
 		}
-		strcat(txt_buf, "Warmboot 提取到了 warmboot.bin\n\n");
+		strcat(txt_buf, "Warmboot提取到了warmboot.bin\n\n");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 	}
@@ -1317,13 +1317,13 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 	pkg2_hdr_t *pkg2_hdr = pkg2_decrypt(pkg2, kb);
 	if (!pkg2_hdr)
 	{
-		strcat(txt_buf, "#FFDD00 Pkg2 解密失败!#");
+		strcat(txt_buf, "#FFDD00 Pkg2解密失败!#");
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 
 		if (!res)
 		{
-			strcat(txt_buf, "\n加密的 pkg2 提取到了 pkg2_encr.bin\n");
+			strcat(txt_buf, "\n加密的 pkg2提取到了pkg2_encr.bin\n");
 			lv_label_set_text(lb_desc, txt_buf);
 			manual_system_maintenance(true);
 		}
@@ -1336,8 +1336,8 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 
 	// Display info.
 	s_printf(txt_buf + strlen(txt_buf),
-		"#C7EA46 Kernel size:   #0x%05X\n"
-		"#C7EA46 INI1 size:     #0x%05X\n\n",
+		"#C7EA46 系统内核大小:   #0x%05X\n"
+		"#C7EA46 INI1程序大小:   #0x%05X\n\n",
 		pkg2_hdr->sec_size[PKG2_SEC_KERNEL], pkg2_hdr->sec_size[PKG2_SEC_INI1]);
 
 	lv_label_set_text(lb_desc, txt_buf);
@@ -1347,7 +1347,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 	emmcsn_path_impl(path, "/pkg2", "pkg2_decr.bin", &emmc_storage);
 	if (sd_save_to_file(pkg2, pkg2_hdr->sec_size[PKG2_SEC_KERNEL] + pkg2_hdr->sec_size[PKG2_SEC_INI1], path))
 		goto out;
-	strcat(txt_buf, "pkg2 提取到了 pkg2_decr.bin\n");
+	strcat(txt_buf, "pkg2提取到了pkg2_decr.bin\n");
 	lv_label_set_text(lb_desc, txt_buf);
 	manual_system_maintenance(true);
 
@@ -1355,7 +1355,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 	emmcsn_path_impl(path, "/pkg2", "kernel.bin", &emmc_storage);
 	if (sd_save_to_file(pkg2_hdr->data, pkg2_hdr->sec_size[PKG2_SEC_KERNEL], path))
 		goto out;
-	strcat(txt_buf, "Kernel 提取到了 kernel.bin\n");
+	strcat(txt_buf, "Kernel提取到了kernel.bin\n");
 	lv_label_set_text(lb_desc, txt_buf);
 	manual_system_maintenance(true);
 
@@ -1371,7 +1371,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 
 	if (!ini1_off)
 	{
-		strcat(txt_buf, "#FFDD00 提取 INI1 和 kips 失败!#\n");
+		strcat(txt_buf, "#FFDD00 提取INI1和kips失败!#\n");
 		goto out;
 	}
 
@@ -1380,7 +1380,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 	if (sd_save_to_file(ini1, ini1_size, path))
 		goto out;
 
-	strcat(txt_buf, "INI1 提取到了 ini1.bin\n\n");
+	strcat(txt_buf, "INI1提取到了ini1.bin\n\n");
 	lv_label_set_text(lb_desc, txt_buf);
 	manual_system_maintenance(true);
 
@@ -1410,7 +1410,7 @@ static lv_res_t _create_window_dump_pk12_tool(lv_obj_t *btn)
 			goto out;
 		}
 
-		s_printf(txt_buf + strlen(txt_buf), "%s kip 提取到了 %s.kip1\n", kip1->name, kip1->name);
+		s_printf(txt_buf + strlen(txt_buf), "%s kip提取到了%s.kip1\n", kip1->name, kip1->name);
 		lv_label_set_text(lb_desc, txt_buf);
 		manual_system_maintenance(true);
 
@@ -1469,7 +1469,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	}
 	lv_obj_t *label_btn = lv_label_create(btn, NULL);
 	lv_btn_set_fit(btn, true, true);
-	lv_label_set_static_text(label_btn, SYMBOL_UPLOAD"  备份 eMMC");
+	lv_label_set_static_text(label_btn, SYMBOL_UPLOAD"  备份eMMC");
 	lv_obj_align(btn, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn, LV_BTN_ACTION_CLICK, create_window_backup_restore_tool);
 
@@ -1486,7 +1486,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	// Create Restore eMMC button.
 	lv_obj_t *btn2 = lv_btn_create(h1, btn);
 	label_btn = lv_label_create(btn2, NULL);
-	lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  恢复 eMMC");
+	lv_label_set_static_text(label_btn, SYMBOL_DOWNLOAD"  恢复eMMC");
 	lv_obj_align(btn2, label_txt2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 	lv_btn_set_action(btn2, LV_BTN_ACTION_CLICK, create_window_backup_restore_tool);
 
@@ -1508,7 +1508,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt3 = lv_label_create(h2, NULL);
-	lv_label_set_static_text(label_txt3, "SD分区 & USB");
+	lv_label_set_static_text(label_txt3, "SD分区与USB");
 	lv_obj_set_style(label_txt3, th->label.prim);
 	lv_obj_align(label_txt3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI * 3 / 10);
 
@@ -1550,9 +1550,9 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	label_txt4 = lv_label_create(h2, NULL);
 	lv_label_set_recolor(label_txt4, true);
 	lv_label_set_static_text(label_txt4,
-		"#C7EA46 USB大容量存储#, #C7EA46 gamepad# 和其他USB工具.\n"
+		"#C7EA46 USB大容量存储#, #C7EA46 手柄# 和其他USB工具.\n"
 		"大容量存储可以挂载SD卡, eMMC 和 emuMMC.\n"
-		"gamepad可以将Switch转变为输入设备.#");
+		"手柄可以将Switch转变为输入设备.#");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 }

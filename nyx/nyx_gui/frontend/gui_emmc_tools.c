@@ -215,20 +215,20 @@ static lv_res_t _emmc_backup_buttons_raw_toggle(lv_obj_t *btn)
 		lv_obj_realign(emmc_btn_ctxt.emmc_boot);
 
 		if (!emmc_btn_ctxt.restore)
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  eMMC 原始GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  eMMC原始GPP");
 		else
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  eMMC 原始GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  eMMC原始GPP");
 		lv_obj_realign(emmc_btn_ctxt.emmc_raw_gpp);
 
 		if (!emmc_btn_ctxt.restore)
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC 系统");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC系统");
 		else
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC 所有");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_sys, NULL), SYMBOL_MODULES"  eMMC所有");
 		lv_obj_realign(emmc_btn_ctxt.emmc_sys);
 
 		if (!emmc_btn_ctxt.restore)
 		{
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_usr, NULL), SYMBOL_MODULES_ALT"  eMMC 用户");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_usr, NULL), SYMBOL_MODULES_ALT"  eMMC用户");
 			lv_obj_realign(emmc_btn_ctxt.emmc_usr);
 
 			lv_obj_set_click(emmc_btn_ctxt.emmc_usr, true);
@@ -246,9 +246,9 @@ static lv_res_t _emmc_backup_buttons_raw_toggle(lv_obj_t *btn)
 		lv_obj_realign(emmc_btn_ctxt.emmc_boot);
 
 		if (!emmc_btn_ctxt.restore)
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  SD emuMMC 原始GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_UPLOAD"  SD emuMMC原始GPP");
 		else
-			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  SD emuMMC 原始GPP");
+			lv_label_set_static_text(lv_obj_get_child(emmc_btn_ctxt.emmc_raw_gpp, NULL), SYMBOL_DOWNLOAD"  SD emuMMC原始GPP");
 		lv_obj_realign(emmc_btn_ctxt.emmc_raw_gpp);
 
 		lv_obj_set_click(emmc_btn_ctxt.emmc_sys, false);
@@ -271,7 +271,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_obj_t *win;
 
 	emmc_btn_ctxt.restore = false;
-	if (strcmp(lv_label_get_text(lv_obj_get_child(btn, NULL)), SYMBOL_UPLOAD"  备份 eMMC"))
+	if (strcmp(lv_label_get_text(lv_obj_get_child(btn, NULL)), SYMBOL_UPLOAD"  备份eMMC"))
 		emmc_btn_ctxt.restore = true;
 
 	if (!emmc_btn_ctxt.restore)
@@ -382,7 +382,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	lv_label_set_static_text(label_sep, "");
 
 	lv_obj_t *label_txt3 = lv_label_create(h2, NULL);
-	lv_label_set_static_text(label_txt3, "GPP 分区");
+	lv_label_set_static_text(label_txt3, "GPP分区");
 	lv_obj_set_style(label_txt3, lv_theme_get_current()->label.prim);
 	lv_obj_align(label_txt3, label_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, -LV_DPI * 4 / 21);
 
@@ -394,9 +394,9 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	label_btn = lv_label_create(btn3, NULL);
 	lv_btn_set_fit(btn3, true, true);
 	if (!emmc_btn_ctxt.restore)
-		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC 系统");
+		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC系统");
 	else
-		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC 所有");
+		lv_label_set_static_text(label_btn, SYMBOL_MODULES"  eMMC所有");
 	lv_obj_align(btn3, line_sep, LV_ALIGN_OUT_BOTTOM_LEFT, LV_DPI / 4, LV_DPI / 4);
 	lv_btn_set_action(btn3, LV_BTN_ACTION_CLICK, _emmc_backup_buttons_decider);
 	emmc_btn_ctxt.emmc_sys = btn3;
@@ -425,7 +425,7 @@ lv_res_t create_window_backup_restore_tool(lv_obj_t *btn)
 	{
 		lv_obj_t *btn4 = lv_btn_create(h2, btn1);
 		label_btn = lv_label_create(btn4, NULL);
-		lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  eMMC 用户");
+		lv_label_set_static_text(label_btn, SYMBOL_MODULES_ALT"  eMMC用户");
 		lv_obj_align(btn4, label_txt4, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 2);
 		lv_btn_set_action(btn4, LV_BTN_ACTION_CLICK, _emmc_backup_buttons_decider);
 		emmc_btn_ctxt.emmc_usr = btn4;
