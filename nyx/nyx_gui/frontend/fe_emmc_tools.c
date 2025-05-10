@@ -632,8 +632,8 @@ static int _dump_emmc_part(emmc_tool_gui_t *gui, char *sd_path, int active_part,
 			else
 			{
 				s_printf(gui->txt_buf,
-					"\n#FFDD00 从emuMMC读取%d个块时出现错误,#\n"
-					"#FFDD00 LBA为%08X, (第%d次重试).#",
+					"\n#FFDD00 从emuMMC读取%d个块时出现错误, LBA %08X,#\n"
+					"#FFDD00 emuMMC %08X (第%d次重试).#",
 					num, lba_curr + sd_sector_off, lba_curr, ++retryCount);
 			}
 			lv_label_ins_text(gui->label_log, LV_LABEL_POS_LAST, gui->txt_buf);
