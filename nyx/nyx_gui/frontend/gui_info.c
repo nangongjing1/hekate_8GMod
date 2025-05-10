@@ -2322,10 +2322,10 @@ static lv_res_t _create_window_sdcard_info_status(lv_obj_t *btn)
 	f_getfree("", &sd_fs.free_clst, NULL);
 
 	lv_label_set_text(lb_desc3,
-		"#00DDFF Found FAT FS:#\n"
-		"Filesystem:\n"
-		"Cluster:\n"
-		"Size free/total:"
+		"#00DDFF 发现FAT系统:#\n"
+		"文件系统:\n"
+		"簇大小:\n"
+		"可用/总空间:"
 	);
 
 	lv_obj_set_width(lb_desc3, lv_obj_get_width(desc3));
