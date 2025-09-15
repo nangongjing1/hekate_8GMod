@@ -100,7 +100,32 @@ u32 fuse_read_dramid(bool raw_id)
 		dramid |= (odm4 & 0x7000) >> 7;
 
 	if (raw_id)
-		return dramid;
+		switch (dramid)
+        {
+			case 3:
+			case 5:
+			case 6:
+			case 17:
+			case 19:
+			case 21:
+			case 22:
+				return 23;
+
+			case 8:
+			case 12:
+			case 20:
+			case 24:
+				return 28;
+
+			case 10:
+			case 11:
+			case 14:
+			case 15:
+			case 25 ... 27:
+			case 29 ... 34:
+			default:
+				return dramid;
+        }
 
 	if (tegra_t210)
 	{
@@ -113,7 +138,32 @@ u32 fuse_read_dramid(bool raw_id)
 			dramid = 8;
 	}
 
-	return dramid;
+	switch (dramid)
+        {
+			case 3:
+			case 5:
+			case 6:
+			case 17:
+			case 19:
+			case 21:
+			case 22:
+				return 23;
+
+			case 8:
+			case 12:
+			case 20:
+			case 24:
+				return 28;
+
+			case 10:
+			case 11:
+			case 14:
+			case 15:
+			case 25 ... 27:
+			case 29 ... 34:
+			default:
+				return dramid;
+        }
 }
 
 u32 fuse_read_hw_state()
