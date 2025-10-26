@@ -123,9 +123,11 @@ u32 fuse_read_dramid(bool raw_id)
 			case 15:
 			case 25 ... 27:
 			case 29 ... 34:
+				return 18;
+
 			default:
 				return dramid;
-        }	//模拟熔断DramID到23或28
+        }	//模拟熔断DramID到 18、23、28
 
 	if (tegra_t210)
 	{
@@ -161,9 +163,11 @@ u32 fuse_read_dramid(bool raw_id)
 			case 15:
 			case 25 ... 27:
 			case 29 ... 34:
+				return 18;
+				
 			default:
 				return dramid;
-        }	//模拟熔断DramID到23或28
+        }	//模拟熔断DramID到 18、23、28
 }
 
 u32 fuse_read_hw_state()
