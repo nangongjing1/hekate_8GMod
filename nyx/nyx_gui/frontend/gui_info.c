@@ -774,7 +774,7 @@ static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 						ram_density.chip0.rank0_ch1 == ram_density.chip0.rank1_ch1)
 					   ? 2 : 1;
 	bool rank_bad = ranks != actual_ranks;
-	s_printf(txt_buf + strlen(txt_buf), "%s %d x %s", rank_bad ? "#FFDD00" : "", actual_ranks * channels, rank_bad ? "#" : "");
+	s_printf(txt_buf + strlen(txt_buf), "%s 4 x %s", rank_bad ? "#FFDD00" : "", actual_ranks * channels, rank_bad ? "#" : "");		//8GB显示
 
 	switch ((ram_density.chip0.rank0_ch0 & 0x3C) >> 2)
 	{
@@ -809,7 +809,7 @@ static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 				   ? 2 : 1;
 	rank_bad = ranks != actual_ranks;
 
-	s_printf(txt_buf + strlen(txt_buf), " #FF8000 |# %s %d x %s", rank_bad ? "#FFDD00" : "", actual_ranks * channels, rank_bad ? "#" : "");
+	s_printf(txt_buf + strlen(txt_buf), " #FF8000 |# %s 4 x %s", rank_bad ? "#FFDD00" : "", actual_ranks * channels, rank_bad ? "#" : "");	//8GB显示
 
 	switch ((ram_density.chip1.rank0_ch0 & 0x3C) >> 2)
 	{
