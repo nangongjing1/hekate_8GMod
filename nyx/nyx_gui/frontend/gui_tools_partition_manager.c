@@ -1635,7 +1635,7 @@ static lv_res_t _sd_create_mbox_start_partitioning()
 	lv_mbox_set_text(mbox,
 		"#FF8000 SD分区管理器#\n\n"
 		"#FFDD00 警告: 真的要继续吗?!#\n\n"
-		"按#FF8000 电源键# 继续.\n按 #FF8000 音量键# 中止.");
+		"按 #FF8000 电源键# 继续.\n按 #FF8000 音量键# 中止.");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	manual_system_maintenance(true);
 
@@ -1877,7 +1877,7 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
 
-	lv_mbox_set_text(mbox, "#FF8000 eMMC Partition Manager#");
+	lv_mbox_set_text(mbox, "#FF8000 eMMC分区管理器#");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_top(mbox, true);
 
@@ -1885,14 +1885,14 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 
 	// Use safety wait if backup is not possible.
 	char *txt_buf = malloc(SZ_4K);
-	strcpy(txt_buf, "#FF8000 eMMC Partition Manager#\n\nSafety wait ends in ");
+	strcpy(txt_buf, "#FF8000 eMMC分区管理器#\n\n安全等待 ");
 	lv_mbox_set_text(mbox, txt_buf);
 
 	u32 seconds = 5;
 	u32 text_idx = strlen(txt_buf);
 	while (seconds)
 	{
-		s_printf(txt_buf + text_idx, "%d seconds...", seconds);
+		s_printf(txt_buf + text_idx, "%d 秒后结束...", seconds);
 		lv_mbox_set_text(mbox, txt_buf);
 		manual_system_maintenance(true);
 		msleep(1000);
@@ -1900,9 +1900,9 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 	}
 
 	lv_mbox_set_text(mbox,
-		"#FF8000 eMMC Partition Manager#\n\n"
-		"#FFDD00 Warning: Do you really want to continue?!#\n\n"
-		"Press #FF8000 POWER# to Continue.\nPress #FF8000 VOL# to abort.");
+		"#FF8000 eMMC分区管理器#\n\n"
+		"#FFDD00 警告: 真的要继续吗?!#\n\n"
+		"按 #FF8000 电源键# to 继续.\n按 #FF8000 音量键# 中止.");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	manual_system_maintenance(true);
 
@@ -1910,7 +1910,7 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 		goto exit;
 
 	// Start partitioning.
-	lv_mbox_set_text(mbox, "#FF8000 eMMC Partition Manager#");
+	lv_mbox_set_text(mbox, "#FF8000 eMMC分区管理器#");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	manual_system_maintenance(true);
 
@@ -1923,14 +1923,14 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 	lv_obj_set_width(lbl_extra, (LV_HOR_RES / 9 * 6) - LV_DPI / 2);
 	lv_label_set_align(lbl_extra, LV_LABEL_ALIGN_CENTER);
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Initializing...");
-	lv_label_set_text(lbl_extra, "Please wait...");
+	lv_label_set_text(lbl_status, "#00DDFF 状态:# 初始化中...");
+	lv_label_set_text(lbl_extra, "请等待...");
 	lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
 	manual_system_maintenance(true);
 
 	if (!emmc_initialize(false))
 	{
-		lv_label_set_text(lbl_extra, "#FFDD00 Failed to init eMMC!#");
+		lv_label_set_text(lbl_extra, "#FFDD00 初始化eMMC失败!#");
 		goto exit;
 	}
 
@@ -1938,21 +1938,21 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 
 	if (!emummc_raw_derive_bis_keys())
 	{
-		lv_label_set_text(lbl_extra, "#FFDD00 For formatting USER partition,#\n#FFDD00 BIS keys are needed!#");
+		lv_label_set_text(lbl_extra, "#FFDD00 格式化USER分区,#\n#FFDD00 需要BIS密钥!#");
 		emmc_end();
 		goto exit;
 	}
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Flashing partition table...");
-	lv_label_set_text(lbl_extra, "Please wait...");
+	lv_label_set_text(lbl_status, "#00DDFF 状态:# 刷写分区表...");
+	lv_label_set_text(lbl_extra, "请等待...");
 	manual_system_maintenance(true);
 
 	// Prepare MBR and GPT header and partition entries and flash them.
 	if (_emmc_prepare_and_flash_mbr_gpt())
 		goto no_hos_user_part;
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Formatting USER partition...");
-	lv_label_set_text(lbl_extra, "Please wait...");
+	lv_label_set_text(lbl_status, "#00DDFF 状态:# 格式化USER分区...");
+	lv_label_set_text(lbl_extra, "请等待...");
 	manual_system_maintenance(true);
 
 	// Get USER partition and configure BIS and FatFS.
@@ -1963,7 +1963,7 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 	if (!user_part)
 	{
 no_hos_user_part:
-		s_printf(txt_buf, "#FF0000 HOS USER partition doesn't exist!#\nRestore HOS backup first...");
+		s_printf(txt_buf, "#FF0000 官方系统USER分区不存在!#\n请先恢复官方系统...");
 		lv_label_set_text(lbl_extra, txt_buf);
 
 		emmc_gpt_free(&gpt);
@@ -1989,7 +1989,7 @@ no_hos_user_part:
 
 	if (mkfs_error)
 	{
-		s_printf(txt_buf, "#FF0000 Failed (%d)!#\nPlease try again...\n", mkfs_error);
+		s_printf(txt_buf, "#FF0000 失败 (%d)!#\n请重试...\n", mkfs_error);
 		lv_label_set_text(lbl_extra, txt_buf);
 
 		free(buff);
@@ -2032,7 +2032,7 @@ no_hos_user_part:
 		lv_btn_set_state(btn_flash_android, LV_BTN_STATE_INA);
 	}
 
-	lv_label_set_text(lbl_status, "#00DDFF Status:# Done!");
+	lv_label_set_text(lbl_status, "#00DDFF 状态:# 完成!");
 	manual_system_maintenance(true);
 
 	// Set buttons depending on what user chose to create.

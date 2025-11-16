@@ -858,7 +858,7 @@ static lv_res_t _create_mbox_clock_edit(lv_obj_t *btn)
 
 	// Add DST option.
 	lv_obj_t *btn_dst = lv_btn_create(mbox, NULL);
-	nyx_create_onoff_button(th, h1, btn_dst, SYMBOL_BRIGHTNESS" Auto Daylight Saving Time", _action_auto_dst_toggle, true);
+	nyx_create_onoff_button(th, h1, btn_dst, SYMBOL_BRIGHTNESS" 自动夏令时", _action_auto_dst_toggle, true);
 	if (n_cfg.timedst)
 		lv_btn_set_state(btn_dst, LV_BTN_STATE_TGL_REL);
 	nyx_generic_onoff_toggle(btn_dst);
