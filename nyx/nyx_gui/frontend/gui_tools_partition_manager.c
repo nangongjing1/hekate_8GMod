@@ -2840,7 +2840,7 @@ check_changes:
 	}
 	else if (has_mbr_attributes || gpt_emummc_migrate_no || gpt_oob_empty_part_no)
 	{
-		s_printf(txt_buf, "#00DDFF The following need to be corrected:#\n");
+		s_printf(txt_buf, "#00DDFF 以下需要修正:#\n");
 		if (has_mbr_attributes)
 			s_printf(txt_buf + strlen(txt_buf), "- MBR属性\n");
 		if (gpt_emummc_migrate_no)
@@ -3300,7 +3300,7 @@ lv_res_t create_window_partition_manager(bool emmc)
 	{
 		lv_label_set_static_text(lbl_notes,
 			"注1: 在所选分区之后存在的任何分区都会从表中移除.\n"
-			"注2: HOS用户分区将被格式化. 可以使用存档数据管理器将它们移动到其他分区.\n"
+			"注2: 官方系统用户分区将被格式化. 可以使用存档数据管理器将它们移动到其他分区.\n"
 			"注3: 如果找到合适的分区和安装程序文件, #C7EA46 刷写Linux# 和 #C7EA46 刷写Android# 将会刷入文件.\n");
 		lv_obj_align(lbl_notes, lbl_and, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 6 * 4);
 	}
