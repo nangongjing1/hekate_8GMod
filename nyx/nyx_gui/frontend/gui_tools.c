@@ -1553,7 +1553,7 @@ static void _create_tab_tools_emmc_pkg12(lv_theme_t *th, lv_obj_t *parent)
 	lv_obj_t *label_txt2 = lv_label_create(h1, NULL);
 	lv_label_set_recolor(label_txt2, true);
 	lv_label_set_static_text(label_txt2,
-		"允许您将eMMC/emuMMC分区单独或作为整个原始镜像\n"
+		"允许您将eMMC或emuMMC分区单独或作为整个原始镜像\n"
 		"备份到SD卡..\n"
 		"#C7EA46 支持# #FF8000 4GB# #C7EA46 及以上SD卡. #"
 		"#FF8000 FAT32# #C7EA46 和 ##FF8000 exFAT##C7EA46 文件系统.#");

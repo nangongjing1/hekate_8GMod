@@ -1659,7 +1659,7 @@ static lv_res_t _create_window_home_launch(lv_obj_t *btn)
 	else if (!more_cfg)
 		win = create_window_launch(SYMBOL_GPS" 启动");
 	else
-		win = create_window_launch(SYMBOL_GPS" 更多配置");
+		win = create_window_launch(SYMBOL_GPS" 更多设置");
 
 	lv_win_add_btn(win, NULL, SYMBOL_LIST" 日志 #D0D0D0 OFF#", logs_onoff_toggle);
 	launch_logs_enable = false;
