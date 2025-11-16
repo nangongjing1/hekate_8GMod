@@ -808,7 +808,7 @@ int emummc_raw_derive_bis_keys()
 		lv_label_set_style(lb_desc, &monospace_text);
 		lv_obj_set_width(lb_desc, LV_HOR_RES / 9 * 4);
 
-		lv_label_set_text(lb_desc, "#FFDD00 BIS keys validation failed!#\n");
+		lv_label_set_text(lb_desc, "#FFDD00 BIS密钥校验失败!#\n");
 		lv_mbox_add_btns(mbox, mbox_btn_map, mbox_action);
 
 		lv_obj_align(mbox, NULL, LV_ALIGN_CENTER, 0, 0);
