@@ -487,7 +487,7 @@ void _hw_info_wafer(int die_x, int die_y)
 
 	lv_obj_t *wafer_txt = lv_label_create(lv_scr_act(), NULL);
 	lv_label_set_style(wafer_txt, &monospace_text);
-	lv_label_set_static_text(wafer_txt, "Wafer");
+	lv_label_set_static_text(wafer_txt, "晶圆");
 	lv_obj_align(wafer_txt, wafer_img, LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
 	hw_info->wafer_txt = wafer_txt;
 }
@@ -539,7 +539,7 @@ static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 		"#FF8000 SKU:#\n"
 		"#FF8000 DRAM标识:#\n"
 		"#FF8000 熔断计数(ODM 7/6):#\n"
-		"ODM字段(4, 6, 7):\n"
+		"ODM字段(4/6/7):\n"
 		"安全启动密钥(SBK):\n"
 		"设备密钥(DK):\n"
 		"公钥(PK SHA256):\n\n"
@@ -554,10 +554,10 @@ static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 		"SoC速度计2:\n\n"
 		"供应商代码:\n"
 		"制造厂代码:\n"
-		"批次代码 0:\n"
+		"晶圆厂/批次代码:\n"
 		"晶圆ID:\n"
-		"X 坐标:\n"
-		"Y 坐标:\n\n"
+		"X坐标:\n"
+		"Y坐标:\n\n"
 		"运行时间:"
 	);
 
