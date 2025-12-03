@@ -544,7 +544,7 @@ static lv_res_t _create_window_hw_info_status(lv_obj_t *btn)
 		"设备密钥(DK):\n"
 		"公钥(PK SHA256):\n\n"
 		"操作系统密钥生成修订版本:\n"
-		"USB 控制器 (BROM):\n"
+		"USB控制器(BROM):\n"
 		"最终测试修订版本:\n"
 		"芯片探测修订版本:\n"
 		"BootROM 修订版本:\n\n"
