@@ -2975,7 +2975,7 @@ void create_tab_info(lv_theme_t *th, lv_obj_t *parent)
 	lv_label_set_static_text(label_txt4,
 		"查看和提取缓存的 #C7EA46 Fuses# 和 #C7EA46 KFuses#信息.\n"
 		"Fuses包含了SoC/SKU和KFuses HDCP的密钥信息.\n"
-		"你也可以查看#C7EA46 DRAM#, #C7EA46 Screen# 和 #C7EA46 Touch panel#的信息.");
+		"你也可以查看#C7EA46 DRAM#, #C7EA46 屏幕# 和 #C7EA46 触摸面板#的信息.");
 	lv_obj_set_style(label_txt4, &hint_small_style);
 	lv_obj_align(label_txt4, btn3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, LV_DPI / 3);
 
