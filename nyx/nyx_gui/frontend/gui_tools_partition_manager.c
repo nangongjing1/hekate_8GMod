@@ -1860,10 +1860,10 @@ static lv_res_t _emmc_create_mbox_start_partitioning()
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char *mbox_btn_map[] =  { "\251", "\222OK", "\251", "" };
-	static const char *mbox_btn_map1[] = { "\222Flash Linux", "\222Flash Android", "\221OK", "" };
-	static const char *mbox_btn_map2[] = { "\222Flash Linux", "\221OK", "" };
-	static const char *mbox_btn_map3[] = { "\222Flash Android", "\221OK", "" };
+	static const char *mbox_btn_map[] =  { "\251", "\222确定", "\251", "" };
+	static const char *mbox_btn_map1[] = { "\222刷写 Linux", "\222刷写 Android", "\221确定", "" };
+	static const char *mbox_btn_map2[] = { "\222刷写 Linux", "\221确定", "" };
+	static const char *mbox_btn_map3[] = { "\222刷写 Android", "\221确定", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES / 9 * 6);
