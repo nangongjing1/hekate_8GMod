@@ -1084,18 +1084,18 @@ static lv_res_t _create_mbox_reboot_ofw()
 	lv_obj_set_style(dark_bg, &mbox_darken);
 	lv_obj_set_size(dark_bg, LV_HOR_RES, LV_VER_RES);
 
-	static const char * mbox_btn_map[] = { "\221OK", "\221Cancel", "" };
+	static const char * mbox_btn_map[] = { "\221确定", "\221取消", "" };
 	lv_obj_t *mbox = lv_mbox_create(dark_bg, NULL);
 	lv_mbox_set_recolor_text(mbox, true);
 	lv_obj_set_width(mbox, LV_HOR_RES * 2 / 3);
 
 	lv_mbox_set_text(mbox,
-		"#FF8000 Warning#\n\n"
-		"#FFDD00 Your real DRAM ID does not match your RAM!#\n"
-		"#FFDD00 Density and rank differ!#\n\n"
-		"#FFDD00 Choosing to boot that way will cause #\n"
-		"#FFDD00 performance degradation or even crashes.#\n\n"
-		"Do you really want to boot via OFW method?#");
+		"#FF8000 警告#\n\n"
+		"#FFDD00 你的真实 DRAM ID 与 RAM 不匹配！#\n"
+		"#FFDD00 密度和等级存在差异！#\n\n"
+		"#FFDD00 选择以这种方式启动将会导致#\n"
+		"#FFDD00 性能下降甚至崩溃。#\n\n"
+		"你真的想要通过官方系统方式启动吗？#");
 
 	lv_mbox_add_btns(mbox, mbox_btn_map, _reboot_ofw_action);
 
