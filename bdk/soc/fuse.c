@@ -99,36 +99,7 @@ void fuse_force_8gb_dramid()
 
 u32 fuse_read_dramid(bool raw_id)
 {
-	bool tegra_t210 = hw_get_chip_id() == GP_HIDREV_MAJOR_T210;
-	u32  odm4       = fuse_read_odm(4);
-
-	u32 dramid = (odm4 & 0xF8) >> 3;
-
-	// Get extended dram id info.
-	if (!tegra_t210)
-		dramid |= (odm4 & 0x7000) >> 7;
-
-	if (raw_id)
-		return dramid;
-
-	if (tegra_t210)
-	{
-		if (dramid > 7)
-			dramid = 0;
-
-		if (_dramid_8gb)
-			dramid = 7;
-	}
-	else
-	{
-		if (dramid > 34)
-			dramid = 8;
-
-		if (_dramid_8gb)
-			dramid = 28;
-	}
-
-	return dramid;
+    return 28;
 }
 
 u32 fuse_read_hw_state()
